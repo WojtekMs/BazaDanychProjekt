@@ -1,0 +1,174 @@
+DROP TABLE Zamowienie;
+DROP TABLE Produkty;
+DROP TABLE Modele;
+DROP TABLE Producenci;
+DROP TABLE Pracownik;
+DROP TABLE Dane_kontaktowe;
+DROP TABLE Kategorie;
+DROP TABLE Wymiary;
+DROP TABLE Uprawnienia;
+DROP TABLE Dane_logowania;
+-- Tworzenie Tabel
+CREATE TABLE Produkty (
+	produkt_id INT PRIMARY KEY,
+    producent_id INT,
+    model_id INT,
+    kategorie_id INT,
+    wymiar_id INT,
+    opis VARCHAR(200),
+    ilosc INT DEFAULT 0,
+    cena DECIMAL(10,2) NOT NULL
+);
+
+
+CREATE TABLE Producenci (
+	producent_id INT PRIMARY KEY,
+    producent VARCHAR(30),
+    dane_kontaktowe_id INT
+);
+
+
+ALTER TABLE Produkty
+ADD FOREIGN KEY(producent_id)
+REFERENCES Producenci(producent_id)
+ON DELETE SET NULL;
+
+CREATE TABLE Dane_kontaktowe(
+	dane_kontaktowe_id INT PRIMARY KEY,
+    adres_email VARCHAR(50),
+    numer_telefonu VARCHAR(15),
+    adres VARCHAR(100)
+);
+
+ALTER TABLE Producenci
+ADD FOREIGN KEY(dane_kontaktowe_id)
+REFERENCES Dane_kontaktowe(dane_kontaktowe_id)
+ON DELETE SET NULL;
+
+CREATE TABLE Zamowienie(
+	zamowienie_id INT PRIMARY KEY,
+    produkt_id INT,
+    kasa_id INT,
+    FOREIGN KEY(produkt_id) REFERENCES Produkty(produkt_id) ON DELETE SET NULL
+);
+
+
+CREATE TABLE Modele(
+	model_id INT PRIMARY KEY,
+    producent_id INT,
+    model VARCHAR(50),
+    rok_produkcji INT,
+    FOREIGN KEY(producent_id) REFERENCES Producenci(producent_id) ON DELETE SET NULL
+);
+
+ALTER TABLE Produkty
+ADD FOREIGN KEY(model_id)
+REFERENCES Modele(model_id)
+ON DELETE SET NULL;
+
+
+CREATE TABLE Kategorie(
+	kategorie_id INT PRIMARY KEY,
+    kategoria VARCHAR(30)
+);
+
+ALTER TABLE Produkty
+ADD FOREIGN KEY(kategorie_id)
+REFERENCES Kategorie(kategorie_id)
+ON DELETE SET NULL;
+
+-- skala w mm
+CREATE TABLE Wymiary(
+	wymiar_id INT PRIMARY KEY,
+    wysokosc INT NOT NULL,
+    szerokosc INT NOT NULL,
+    glebokosc INT NOT NULL
+);
+
+ALTER TABLE Produkty
+ADD FOREIGN KEY(wymiar_id)
+REFERENCES Wymiary(wymiar_id)
+ON DELETE SET NULL;
+
+CREATE TABLE Uprawnienia(
+	uprawnienie_id INT PRIMARY KEY,
+    uprawnienie VARCHAR(30)
+);
+
+-- haslo przechowywane w formie hashy (planowane 256 bitow)
+CREATE TABLE Dane_logowania(
+	dane_logowania_id INT PRIMARY KEY,
+    login VARCHAR(20),
+    haslo VARCHAR(100)
+);
+
+CREATE TABLE Pracownik(
+	pracownik_id INT PRIMARY KEY,
+    dane_logowania_id INT,
+    dane_kontaktowe_id INT,
+    uprawnienie_id INT,
+    imie VARCHAR(20),
+    nazwisko VARCHAR(20),
+    FOREIGN KEY(dane_logowania_id) REFERENCES Dane_logowania(dane_logowania_id) ON DELETE SET NULL,
+    FOREIGN KEY(dane_kontaktowe_id) REFERENCES Dane_kontaktowe(dane_kontaktowe_id) ON DELETE SET NULL,
+    FOREIGN KEY(uprawnienie_id) REFERENCES Uprawnienia(uprawnienie_id) ON DELETE SET NULL
+);
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Final Dane RTV - Dane Kontaktowe.csv' 
+INTO TABLE Dane_kontaktowe 
+FIELDS TERMINATED BY ';' 
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Final Dane RTV - Dane Logowania.csv' 
+INTO TABLE Dane_logowania 
+FIELDS TERMINATED BY ';' 
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Final Dane RTV - Kategorie.csv' 
+INTO TABLE Kategorie 
+FIELDS TERMINATED BY ';' 
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Final Dane RTV - Producenci.csv' 
+INTO TABLE Producenci
+FIELDS TERMINATED BY ';' 
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Final Dane RTV - Modele.csv' 
+INTO TABLE Modele
+FIELDS TERMINATED BY ';' 
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Final Dane RTV - Uprawnienia.csv' 
+INTO TABLE Uprawnienia
+FIELDS TERMINATED BY ';' 
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Final Dane RTV - Wymiary.csv' 
+INTO TABLE Wymiary
+FIELDS TERMINATED BY ';' 
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Final Dane RTV - Pracownik.csv' 
+INTO TABLE Pracownik
+FIELDS TERMINATED BY ';' 
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Final Dane RTV - Produkty.csv' 
+INTO TABLE Produkty
+FIELDS TERMINATED BY ';' 
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+
+SELECT * FROM zamowienie;
+
+DESCRIBE Pracownik;
