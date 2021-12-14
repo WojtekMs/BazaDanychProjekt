@@ -1,0 +1,16 @@
+﻿pracownik_id;dane_logowania_id;dane_kontaktowe_id;uprawnienie_id;imie;nazwisko
+1;1;20;1;Sylwester;Krawczyk
+2;2;21;1;Leopold;Kwiatkowski
+3;3;22;2;Joanna;Bielecka
+4;4;23;2;Andrzej;Czajkowski
+5;5;24;2;Sebastian;Lewandowski
+6;6;25;2;Dorian;Andrzejewski
+7;7;26;2;Aleks;Dobrowolski
+8;8;27;2;Helmut;Kurowski
+9;9;28;2;Wanda;Grzelak
+10;10;29;2;Brunon;Orzechowski
+11;11;30;2;Aleksandra;Michalska
+12;12;31;2;Nina;Sobczak
+13;13;32;2;Mariusz;Bielecki
+14;14;33;2;Zenona;Przybylska
+15;15;34;2;Antoni;Nawrocki

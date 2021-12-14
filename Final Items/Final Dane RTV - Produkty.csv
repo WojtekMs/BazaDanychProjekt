@@ -1,0 +1,121 @@
+﻿produkt_id;producent_id;model_id;kategorie_id;wymiar_id;opis;ilosc;cena
+1;1;1;1;1;Lodówka SAMSUNG RB38T774DB1 EF No frost 203cm Grafitowa;35;2799,99
+2;2;2;1;2;Lodówka BOSCH KGN39MLEA No frost 203cm Srebrna;43;2499,99
+3;3;3;1;3;Lodówka LG GBB71PZDMN No frost 186cm Srebrna;21;1999
+4;3;4;1;4;Lodówka LG GSJ470DIDV Side by Side No frost 179cm Grafitowa Podajnik wody Kostkarka;37;4399
+5;1;5;1;5;Lodówka SAMSUNG RB36T602DB1 No frost 193.5cm Grafitowa;35;2099
+6;4;6;1;6;Lodówka HISENSE RF632N4WIE No frost 200cm Srebrna Podajnik wody;28;3599
+7;5;7;1;7;Lodówka BEKO RCNT375E40ZXBN No frost 185cm Srebrna;50;1799,99
+8;6;8;1;8;Lodówka HAIER HTR3619FNMN No frost 190.5cm Srebrna;17;2099,99
+9;1;9;1;9;Lodówka SAMSUNG RS68A8820B1/EF Side by Side No frost 178cm Grafitowa Podajnik wody Kostkarka;47;4199
+10;1;10;1;10;Lodówka SAMSUNG RB38T650EB1 No frost 203cm Grafitowa Podajnik wody;36;2499,99
+11;4;11;1;11;Lodówka HISENSE RB438N4GB3 No frost 200.3cm Czarna;15;2599,99
+12;1;12;1;12;Lodówka SAMSUNG BESPOKE RB38A7B5D22 EF No frost 203cm Czarna;42;2799
+13;4;13;1;13;Lodówka HISENSE RQ760N4AFF Side by side No frost 178.5cm Czarna Podajnik wody Kostkarka;16;6199
+14;6;14;1;14;Lodówka HAIER A3FE742CMJ No frost 190.5cm Srebrna;22;3499,99
+15;3;15;1;15;Lodówka LG GBB72MCUGN No Frost 203cm Czarny;13;2799,99
+16;7;16;2;16;Ekspres PHILIPS LatteGo 5400 EP5446/70;18;3099
+17;8;17;2;17;Ekspres JURA ENA 8 Full Black;26;4399
+18;9;18;2;18;Ekspres KRUPS Intuition Preference EA873810;14;3699
+19;10;19;2;19;Ekspres SIEMENS EQ.6 Plus TE651209RW;33;2499
+20;11;20;2;20;Ekspres DELONGHI Dinamica Plus ECAM 370.85.B;43;3099
+21;10;21;2;21;Ekspres SIEMENS EQ.500 TP503R09;41;2149
+22;7;22;2;22;Ekspres PHILIPS LatteGo 4300 EP4341/50;33;2599,99
+23;12;23;2;23;Ekspres SAECO Xelsis Deluxe SM8782/30;35;5849
+24;11;24;2;24;Ekspres DELONGHI PrimaDonna Elite ECAM 650.85.MS;42;5999
+25;9;25;2;25;Ekspres KRUPS Evidence One EA895E;35;2599
+26;11;26;2;26;Ekspres DELONGHI PrimaDonna Soul ECAM 610.55.SB;27;4999
+27;12;27;2;27;Ekspres SAECO Xelsis Suprema SM8885/00;22;6789
+28;9;28;2;28;Ekspres KRUPS Evidence EA8901;37;2099
+29;10;29;2;29;Ekspres SIEMENS EQ.6 Plus TE657313RW;30;3399
+30;11;30;2;30;Ekspres DELONGHI Magnifica S ECAM 22.110.B;37;1399,99
+31;7;31;3;31;"Telewizor PHILIPS 55PUS7956 55"" LED 4K Android TV Ambilight x 3 Dolby Atmos Dolby Vision DVB-T2/HEVC/H.265";12;2599
+32;3;32;3;32;"Telewizor LG 65NANO923PB 65"" LED 4K 120Hz WebOS Full Array Dolby Atmos Dolby Vision HDMI 2.1 DVB-T2/HEVC/H.265";19;4499
+33;1;33;3;33;"Telewizor SAMSUNG QE65Q80A 65"" QLED 4K 120Hz Tizen TV Full Array HDMI 2.1 DVB-T2/HEVC/H.265";24;4999
+34;3;34;3;34;"Telewizor LG 65C12LA 65"" OLED 4K 120Hz WebOS Dolby Atmos HDMI 2.1 DVB-T2/HEVC/H.265";21;7990
+35;13;35;3;35;"Telewizor SONY KD75X85JAEP 75"" LED 4K 100 Hz Android TV Dolby Atmos Dolby Vision HDMI 2.1 DVB-T2/HEVC/H.265";10;5970
+36;7;36;3;36;"Telewizor PHILIPS 58PUS8536/12 58"" LED 4K Android TV Ambilight x3 Dolby Atmos Dolby Vision DVB-T2/HEVC/H.265";22;2999
+37;4;37;3;37;"Telewizor HISENSE 65U8GQ 65"" QLED 4K 120Hz Full Array Dolby Atmos DVB-T2/HEVC/H.265";16;3999
+38;3;38;3;38;"Telewizor LG 55NANO883 55"" LED 4K 120Hz WebOS Dolby Vision IQ HDMI 2.1 DVB-T2/HEVC/H.265";9;3699
+39;14;39;3;39;"Telewizor TCL 65C728 65"" QLED 4K 120Hz Android TV Dolby Atmos Dolby Vision HDMI 2.1 DVB-T2/HEVC/H.265";30;3999
+40;13;40;3;40;"Telewizor SONY XR75X93JAEP 75"" LED 4K 120Hz Android TV Full Array Dolby Atmos Dolby Vision HDMI 2.1 DVB-T2/HEVC/H.265";7;7199
+41;7;41;3;41;"Telewizor PHILIPS 65PUS9206 65"" LED 4K 120Hz Android TV Ambilight x4 DVB-T2/HEVC/H.265";28;4999
+42;1;42;3;42;"Telewizor SAMSUNG QE55Q77A 55"" QLED 4K 120Hz Tizen TV HDMI 2.1 DVB-T2/HEVC/H.265";6;3490
+43;3;43;3;43;"Telewizor LG 55C11LB 55"" OLED 4K 120Hz WebOS Dolby Atmos HDMI 2.1 DVB-T2/HEVC/H.265";14;5190
+44;7;44;3;44;"Telewizor PHILIPS 55OLED706 55"" OLED 4K 120Hz Android TV Ambilight x3 Dolby Atmos DVB-T2/HEVC/H.265";4;5199
+45;1;45;3;45;"Telewizor SAMSUNG QE75QN91A 75"" MINILED 4K 120Hz Tizen TV Full Array HDMI 2.1 DVB-T2/HEVC/H.265";26;11699
+46;1;46;4;46;Soundbar SAMSUNG HW-Q600A Czarny;13;1799
+47;1;47;4;47;Soundbar SAMSUNG HW-Q60T;29;1399
+48;7;48;4;48;Soundbar PHILIPS TAB8805/10 Czarny;12;1499
+49;13;49;4;49;Soundbar SONY HT-SD35 Czarny;31;799
+50;1;50;4;50;Soundbar SAMSUNG HW-A450 Czarny;8;899
+51;7;51;4;51;Soundbar PHILIPS TAB8905/10 Szary;5;2199
+52;3;52;4;52;Soundbar LG SL6YF Czarny;33;1090
+53;4;53;4;53;Soundbar HISENSE HS312 Czarny;40;1399
+54;14;54;4;54;Soundbar TCL TS8111 Czarny;19;899,99
+55;4;55;4;55;Soundbar HISENSE HS218 Czarny;39;699,99
+56;13;56;4;56;Soundbar SONY HT-X8500 Dolby Atmos z wbudowanym subwooferem;27;1399
+57;7;57;4;57;Soundbar PHILIPS TAB5305/12 Czarny;23;599
+58;13;58;4;58;Soundbar SONY HT-SF150;3;449
+59;4;59;4;59;Soundbar HISENSE HS205 Czarny;34;299,99
+60;3;60;4;60;Soundbar LG SJ2;2;599
+61;15;61;5;61;Drukarka laserowa, druk dwustronny, tylko czarno-biały, szybkość druku 38str/min, USB 2.0;8;1039
+62;15;62;5;62;Drukarka laserowa, druk dwustronny, tylko czarno-biały, szybkość druku 28str/min, USB 2.0, Wi-Fi, Ethernet, USB typu B;17;3079
+63;16;63;5;63;Drukarka laserowa, druk dwustronny, tylko czarno-biały, szybkość druku 20str/min, USB 2.0, 600x600 DPI;7;799
+64;16;64;5;64;Drukarka laserowa, druk dwustronny, tylko czarno-biały, szybkość druku 28str/min, USB 2.0, 600x600 DPI, Wi-Fi, Ethernet,;5;649
+65;16;65;5;65;Drukarka laserowa, druk dwustronny, tylko czarno-biały, szybkość druku 20str/min, USB 2.0, 1200x1200 DPI;10;579
+66;15;66;5;66;Drukarka atramentowa, druk dwustronny, kolorowa, szybkość druku 14str/min, USB 2.0, 9600x2400 DPI;18;1539
+67;15;67;5;67;Drukarka atramentowa, druk dwustronny ręczny, kolorowa, szybkość druku 4str/min, USB 2.0, 4800x1200 DPI;22;999
+68;16;68;5;68;Drukarka atramentowa, druk dwustronny ręczny, kolorowa, szybkość druku 10str/min, USB 2.0, 1200x600 DPI;15;349
+69;16;69;5;69;Drukarka atramentowa, druk dwustronny ręczny, kolorowa, szybkość druku 18str/min, USB 2.0, 1200x1200 DPI;37;499
+70;15;70;5;70;Drukarka atramentowa, druk dwustronny ręczny, kolorowa, USB 2.0, 4800x1200 DPI;14;479
+71;17;71;5;71;Drukarka atramentowa, druk dwustronny ręczny, czarno-biała, USB 2.0, szybkość druku 32str/min 1440x720 DPI;19;749
+72;17;72;5;72;Drukarka atramentowa, druk dwustronny, czarno-biała, USB 2.0, szybkość druku 24str/min, 1200x1200 DPI;8;2399
+73;17;73;5;73;Urządzenie wielofunkcyjne, drukarka atramentowa,  druk dwustronny ręczny, kolorowy, USB 2.0, szybkość druku 15str/min, 5760x1440 DPI, skaner optyczny, kopiarka, faks;13;899
+74;17;74;5;73;Urządzenie wielofunkcyjne, drukarka atramentowa,  druk dwustronny ręczny, kolorowy, USB typu B, szybkość druku 15str/min, 5760x1440 DPI, skaner optyczny, kopiarka, faks;5;1029
+75;17;75;5;74;Urządzenie wielofunkcyjne, drukarka atramentowa,  druk dwustronny, kolorowy, USB typu B, szybkość druku 20str/min, 4800x1200 DPI, skaner optyczny, kopiarka, faks;6;1919
+76;2;76;6;75;Moc 1000W, pojemność kielicha 1.25L, regulacja obrotów elektroniczna, 7 poziomów obrotów, praca pulsacyjna  ;11;1295
+77;2;77;6;76;Moc 700W, pojemność kielicha 1L, regulacja obrotów mechaniczna, 4 poziomy obrotów, praca pulsacyjna  ;13;999
+78;2;78;6;77;Moc 1000W, pojemność kielicha 1.25L, regulacja obrotów elektroniczna, 7 poziomy obrotów, praca pulsacyjna  ;17;1295
+79;18;79;6;78;Moc 1300W, pojemność kielicha 1.25L, regulacja obrotów elektroniczna, gotowanie na parze, funkcja ważenia  ;5;1899
+80;2;80;6;79;Moc 1000W, pojemność kielicha 1.5L, regulacja obrotów elektroniczna, 7 poziomów obrotów, praca pulsacyjna, możliwość mycia w zmywarce  ;17;1199
+81;2;81;6;80;Moc 1000W, pojemność kielicha 1.25L, regulacja obrotów elektroniczna, 7 poziomów obrotów, praca pulsacyjna, możliwość mycia w zmywarce, dwie misy;8;899
+82;18;82;6;81;Moc 1300W, pojemność kielicha 1L, regulacja obrotów elektroniczna, 12 poziomów obrotów, możliwość mycia w zmywarce, Wi-Fi;13;1699
+83;18;83;6;82;Moc 1000W, pojemność kielicha 1.75L, regulacja obrotów elektroniczna, możliwość mycia w zmywarce, dwie misy;4;355
+84;19;84;6;83;Moc 1200W, pojemność kielicha 2L, regulacja obrotów elektroniczna, praca pulsacyjna, możliwość mycia w zmywarce;7;1699
+85;19;85;6;84;Moc 1700W, pojemność kielicha 1.6L, regulacja obrotów elektroniczna, praca pulsacyjna, możliwość mycia w zmywarce, zabezpieczenie przed przegrzaniem;9;2999
+86;19;86;6;85;Moc 1500W, pojemność kielicha 1.6L, regulacja obrotów elektroniczna, 10 poziomów obrotów, praca pulsacyjna, możliwość mycia w zmywarce, zabezpieczenie przed przegrzaniem;11;5499
+87;19;87;6;86;Moc 1000W, pojemność kielicha 1.2L, regulacja obrotów mechaniczna, 6 poziomów obrotów, praca pulsacyjna, zabezpieczenie przed przegrzaniem;29;1249
+88;19;88;6;87;Moc 1200W, pojemność kielicha 1.6L, regulacja obrotów elektroniczna, zabezpieczenie przed przegrzaniem, funkcja ważenia;15;2479
+89;19;89;6;88;Moc 1000W, pojemność kielicha 1.2L, regulacja obrotów mechaniczna, praca pulsacyjna, zabezpieczenie przed przegrzaniem, mieszanie planetarne;17;879
+90;19;90;6;89;Moc 1700W, pojemność kielicha 1.6L, regulacja obrotów elektroniczna, praca pulsacyjna, zabezpieczenie przed przegrzaniem, podświetlenie misy;13;4599
+91;13;91;7;90;Sony FDR-AX53 black;44;3798
+92;20;92;7;91;Panasonic HC-V180EP-K;18;1049
+93;15;93;7;92;Canon Legria HF G60;34;6999
+94;21;94;7;93;Blackmagic Design Pocket Cinema Camera 4K black;20;5470
+95;22;95;7;94;DJI Ronin 4D 8K;32;52599
+96;23;96;7;95;RED KOMODO 6K S35;17;30720
+97;21;97;7;96;Blackmagic Design Pocket Cinema Camera 6K Pro black;29;11099
+98;20;98;7;97;Panasonic HC-X1500 4k/60p;32;7961
+99;15;99;7;98;Canon XA40 black;15;6499
+100;13;100;7;99;Sony FX3 ILME-FX3;21;21799
+101;15;101;7;100;Canon EOS C70 black (4507C002);28;24389
+102;21;102;7;101;Blackmagic Design URSA Mini Pro 12k;30;28099
+103;23;103;7;102;RED V-RAPTOR 8K VV + 6K S35 (DUAL FORMAT);23;121647
+104;13;104;7;103;Sony PXW-FX9VK XDCAM 6K + 28-125mm f/4;32;68299
+105;15;105;7;104;Canon EOS C300 Mark III;33;51390
+106;25;106;8;105;Xiaomi Mi true Wireless Earbuds Basic 2 black;23;75
+107;24;107;8;106;Apple AirPods 2 white (MV7N2ZM/A);25;587
+108;13;108;8;107;Sony WH-1000XM3 black;20;835
+109;1;109;8;108;Samsung Galaxy Buds+ SM-R175 black;17;419
+110;25;110;8;109;Xiaomi Mi true Wireless Earphones 2 Basic white;22;88,99
+111;24;111;8;110;Apple Airpods Pro white;18;929
+112;1;112;8;111;Samsung Galaxy Buds2 SM-R177 black;16;459
+113;26;113;8;112;JBL Tune 500BT black;34;145
+114;27;114;8;113;Bose QuietComfort 25 II black;28;939,95
+115;26;115;8;114;JBL Tune 220 TWS white;19;239,9
+116;13;116;8;115;Sony WF-100XM4 black;17;929
+117;27;117;8;116;Bose Headphones 700 black;18;1229
+118;25;118;8;117;Xiaomi Redmi Airdots black;23;55,99
+119;1;119;8;118;Samsung Galaxy Buds Live SM-R180 white;23;349
+120;24;120;8;119;Apple AirPods Max space gray;30;2145
