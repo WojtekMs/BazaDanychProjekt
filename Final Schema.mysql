@@ -8,6 +8,10 @@ DROP TABLE Kategorie;
 DROP TABLE Wymiary;
 DROP TABLE Uprawnienia;
 DROP TABLE Dane_logowania;
+
+DROP USER 'admin'@'localhost';
+DROP USER 'pracownik'@'localhost';
+DROP USER 'klient'@'localhost';
 -- Tworzenie Tabel
 CREATE TABLE Produkty (
 	produkt_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -202,3 +206,32 @@ INSERT INTO produkty (producent_id, model_id, kategorie_id, wymiar_id, opis, ilo
 VALUES (3, 121, 3, 120, 'Telewizor LG CX65', 13, 3799.99);
 
 SELECT * FROM produkty;
+
+-- tworzenie konta admina
+CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin';
+-- przyznanie wszystkich przywilejow adminowi
+GRANT ALL PRIVILEGES ON sklep_rtv.* TO 'admin'@'localhost';
+-- logowanie jako admin: w cmd przechodzicie do sciezki gdzie jest zainstalowany mysql
+-- w moim przypadku: C:\Program Files\MySQL\MySQL Server 8.0\bin
+-- u was pewnie jest podobnie, następnie wpisujemy ta komende: mysql --user=admin --password <nazwa bazy danych>
+
+-- tworzenie konta pracownika
+CREATE USER 'pracownik'@'localhost' IDENTIFIED BY 'pracownik';
+-- przyznanie odpowiednich przywilejow pracownikowi:
+GRANT SELECT, UPDATE, DELETE ON sklep_rtv.kategorie TO 'pracownik'@'localhost';
+GRANT SELECT, UPDATE, DELETE ON sklep_rtv.modele TO 'pracownik'@'localhost';
+GRANT SELECT, UPDATE, DELETE ON sklep_rtv.producenci TO 'pracownik'@'localhost';
+GRANT SELECT, UPDATE, DELETE ON sklep_rtv.produkty TO 'pracownik'@'localhost';
+GRANT SELECT, UPDATE, DELETE ON sklep_rtv.wymiary TO 'pracownik'@'localhost';
+GRANT SELECT, UPDATE, DELETE ON sklep_rtv.zamowienie TO 'pracownik'@'localhost';
+
+-- tworzenie konta klienta w sklepie
+CREATE USER 'klient'@'localhost' IDENTIFIED BY 'klient';
+GRANT SELECT ON sklep_rtv.kategorie TO 'klient'@'localhost';
+GRANT SELECT ON sklep_rtv.modele TO 'klient'@'localhost';
+GRANT SELECT ON sklep_rtv.producenci TO 'klient'@'localhost';
+GRANT SELECT ON sklep_rtv.produkty TO 'klient'@'localhost';
+GRANT SELECT ON sklep_rtv.wymiary TO 'klient'@'localhost';
+
+-- wyswietlanie uzytkownikow
+SELECT user,host,plugin FROM mysql.user;
