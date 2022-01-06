@@ -258,11 +258,13 @@ SELECT user,host,plugin FROM mysql.user;
 
 -- usuwanie produktu (po model_id)
 SELECT produkt_id, model_id, opis FROM Produkty WHERE model_id=1;
-SELECT model_id, model FROM ModeleWHERE model_id=1;
+SELECT model_id, model FROM Modele WHERE model_id=1;
 DELETE FROM Modele WHERE model_id=1;
-DELETE FROM Produkty WHERE model_id=1;
+DELETE FROM Produkty WHERE produkt_id=1; -- zmienione z "model_id=1" na "produkt_id=1"
 SELECT produkt_id, model_id, opis FROM Produkty WHERE model_id=1;
-SELECT model_id, model FROM ModeleWHERE model_id=1;
+SELECT model_id, model FROM Modele WHERE model_id=1;
+SELECT * FROM Produkty;
+SELECT * FROM Modele;
 
 -- usuwanie produktu (po product_id)
 SELECT produkt_id, opis FROM Produkty WHERE produkt_id=4;
