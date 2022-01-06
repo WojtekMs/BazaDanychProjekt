@@ -12,6 +12,9 @@ DROP TABLE Dane_logowania;
 DROP USER 'admin'@'localhost';
 DROP USER 'pracownik'@'localhost';
 DROP USER 'klient'@'localhost';
+
+-------------------------------------------------------------------------------
+
 -- Tworzenie Tabel
 CREATE TABLE Produkty (
 	produkt_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -31,11 +34,11 @@ CREATE TABLE Producenci (
     dane_kontaktowe_id INT
 );
 
-
 ALTER TABLE Produkty
 ADD FOREIGN KEY(producent_id)
 REFERENCES Producenci(producent_id)
 ON DELETE SET NULL;
+
 
 CREATE TABLE Dane_kontaktowe(
 	dane_kontaktowe_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -48,6 +51,7 @@ ALTER TABLE Producenci
 ADD FOREIGN KEY(dane_kontaktowe_id)
 REFERENCES Dane_kontaktowe(dane_kontaktowe_id)
 ON DELETE SET NULL;
+
 
 CREATE TABLE Zamowienie(
 	zamowienie_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -118,6 +122,8 @@ CREATE TABLE Pracownik(
     FOREIGN KEY(uprawnienie_id) REFERENCES Uprawnienia(uprawnienie_id) ON DELETE SET NULL
 );
 
+-------------------------------------------------------------------------------
+
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Final Dane RTV - Dane Kontaktowe.csv' 
 INTO TABLE Dane_kontaktowe 
 FIELDS TERMINATED BY ';' 
@@ -172,6 +178,8 @@ FIELDS TERMINATED BY ';'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
+-------------------------------------------------------------------------------
+
 -- wyszukiwanie po producencie (taki jaki jest w opisie)
 SELECT opis, ilosc, cena FROM produkty WHERE produkty.opis LIKE '%philips%';
 -- w miejscu LIKE wystarczy zmieniać markę i mamy wtedy wszystkie produkty tej marki
@@ -194,6 +202,8 @@ AND cena > 400 AND cena < 600
 AND producent_id IN (SELECT producent_id FROM producenci WHERE producent = 'apple');
 -- wystarczy dodwac kolejne rzeczy po AND, żeby wyszukiwac po wielu paramtrach
 
+-------------------------------------------------------------------------------
+
 -- dodawanie produktu
 -- najpierw dodawania modelu jesli jeszcze nie istnieje
 INSERT INTO modele (producent_id, model, rok_produkcji)
@@ -207,6 +217,8 @@ VALUES (3, 121, 3, 120, 'Telewizor LG CX65', 13, 3799.99);
 
 SELECT * FROM produkty;
 
+-------------------------------------------------------------------------------
+
 -- tworzenie konta admina
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin';
 -- przyznanie wszystkich przywilejow adminowi
@@ -214,6 +226,8 @@ GRANT ALL PRIVILEGES ON sklep_rtv.* TO 'admin'@'localhost';
 -- logowanie jako admin: w cmd przechodzicie do sciezki gdzie jest zainstalowany mysql
 -- w moim przypadku: C:\Program Files\MySQL\MySQL Server 8.0\bin
 -- u was pewnie jest podobnie, następnie wpisujemy ta komende: mysql --user=admin --password <nazwa bazy danych>
+
+-------------------------------------------------------------------------------
 
 -- tworzenie konta pracownika
 CREATE USER 'pracownik'@'localhost' IDENTIFIED BY 'pracownik';
@@ -225,6 +239,8 @@ GRANT SELECT, UPDATE, DELETE ON sklep_rtv.produkty TO 'pracownik'@'localhost';
 GRANT SELECT, UPDATE, DELETE ON sklep_rtv.wymiary TO 'pracownik'@'localhost';
 GRANT SELECT, UPDATE, DELETE ON sklep_rtv.zamowienie TO 'pracownik'@'localhost';
 
+-------------------------------------------------------------------------------
+
 -- tworzenie konta klienta w sklepie
 CREATE USER 'klient'@'localhost' IDENTIFIED BY 'klient';
 GRANT SELECT ON sklep_rtv.kategorie TO 'klient'@'localhost';
@@ -233,5 +249,29 @@ GRANT SELECT ON sklep_rtv.producenci TO 'klient'@'localhost';
 GRANT SELECT ON sklep_rtv.produkty TO 'klient'@'localhost';
 GRANT SELECT ON sklep_rtv.wymiary TO 'klient'@'localhost';
 
+-------------------------------------------------------------------------------
+
 -- wyswietlanie uzytkownikow
 SELECT user,host,plugin FROM mysql.user;
+
+-------------------------------------------------------------------------------
+
+-- usuwanie produktu (po model_id)
+SELECT produkt_id, model_id, opis FROM Produkty WHERE model_id=1;
+SELECT model_id, model FROM ModeleWHERE model_id=1;
+DELETE FROM Modele WHERE model_id=1;
+DELETE FROM Produkty WHERE model_id=1;
+SELECT produkt_id, model_id, opis FROM Produkty WHERE model_id=1;
+SELECT model_id, model FROM ModeleWHERE model_id=1;
+
+-- usuwanie produktu (po product_id)
+SELECT produkt_id, opis FROM Produkty WHERE produkt_id=4;
+DELETE FROM Produkty WHERE produkt_id=4;
+SELECT produkt_id, opis FROM Produkty WHERE produkt_id=4;
+
+-------------------------------------------------------------------------------
+
+-- edytowanie produktu (po produkt_id; zmieniamy ilość)
+SELECT opis, ilosc, cena FROM Produkty WHERE produkt_id=2;
+UPDATE Produkty SET ilosc = 11 WHERE produkt_id=2;
+SELECT opis, ilosc, cena FROM Produkty WHERE produkt_id=2;
