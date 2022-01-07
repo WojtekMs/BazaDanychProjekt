@@ -215,7 +215,7 @@ VALUES (830, 1449, 47);
 INSERT INTO produkty (producent_id, model_id, kategorie_id, wymiar_id, opis, ilosc, cena)
 VALUES (3, 121, 3, 120, 'Telewizor LG CX65', 13, 3799.99);
 
-SELECT * FROM produkty;
+SELECT * FROM zamowienie;
 
 -------------------------------------------------------------------------------
 
@@ -277,3 +277,8 @@ SELECT produkt_id, opis FROM Produkty WHERE produkt_id=4;
 SELECT opis, ilosc, cena FROM Produkty WHERE produkt_id=2;
 UPDATE Produkty SET ilosc = 11 WHERE produkt_id=2;
 SELECT opis, ilosc, cena FROM Produkty WHERE produkt_id=2;
+
+-- zamowienie produktu (wybieramy produkt za pomoca produkt_id)
+SELECT * FROM zamowienie;
+INSERT INTO zamowienie (produkt_id, kasa_id) VALUES(10, rand() % 10);
+ 
