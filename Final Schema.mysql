@@ -279,6 +279,19 @@ UPDATE Produkty SET ilosc = 11 WHERE produkt_id=2;
 SELECT opis, ilosc, cena FROM Produkty WHERE produkt_id=2;
 
 -- zamowienie produktu (wybieramy produkt za pomoca produkt_id)
+-- UWAGA: najpierw trzeba wykonac linijke z SET @produkt = 18; zeby to poprawnie zadzialalo 
+SET @produkt = 18;
 SELECT * FROM zamowienie;
-INSERT INTO zamowienie (produkt_id, kasa_id) VALUES(10, rand() % 10);
+INSERT INTO zamowienie (produkt_id, kasa_id) VALUES(@produkt, rand() % 10);
+ 
+-- usuwanie konta pracownika (wybieramy pracownik za pomoca pracownik_id)
+-- UWAGA: najpierw trzeba wykonac linijke z SET @pracownik =1; zeby to poprawnie zadzialalo 
+SET @pracownik = 13;
+SELECT * FROM pracownik WHERE pracownik_id=@pracownik;
+SELECT * FROM dane_logowania WHERE dane_logowania_id IN (SELECT dane_logowania_id FROM pracownik WHERE pracownik_id=@pracownik);
+SELECT * FROM dane_kontaktowe WHERE dane_kontaktowe_id IN (SELECT dane_kontaktowe_id FROM pracownik WHERE pracownik_id=@pracownik);
+
+DELETE FROM dane_logowania WHERE dane_logowania_id IN (SELECT dane_logowania_id FROM pracownik WHERE pracownik_id=@pracownik);
+DELETE FROM dane_kontaktowe WHERE dane_kontaktowe_id IN (SELECT dane_kontaktowe_id FROM pracownik WHERE pracownik_id=@pracownik);
+DELETE FROM pracownik WHERE pracownik_id=@pracownik;
  
