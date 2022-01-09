@@ -295,3 +295,36 @@ DELETE FROM dane_logowania WHERE dane_logowania_id IN (SELECT dane_logowania_id 
 DELETE FROM dane_kontaktowe WHERE dane_kontaktowe_id IN (SELECT dane_kontaktowe_id FROM pracownik WHERE pracownik_id=@pracownik);
 DELETE FROM pracownik WHERE pracownik_id=@pracownik;
  
+-------------------------------------------------------------------------------
+
+-- Dodawanie konta przez admina
+-- Wartości "login", "haslo", "adres@mail.com", "+123123123123", "Wroclaw, Środmieście" zmienić na potrzebne
+insert into dane_logowania(login, haslo) values ("login","haslo");
+insert into dane_kontaktowe(adres_email, numer_telefonu, adres) values ("adres@mail.com", "+123123123123","Wroclaw, Środmieście");
+insert into pracownik(dane_logowania_id, dane_kontaktowe_id, uprawnienie_id, imie, nazwisko) values(
+(select dane_logowania_id from dane_logowania where login = 'login'), 
+(select dane_kontaktowe_id from dane_kontaktowe where adres_email = 'adres@mail.com'), 
+(select uprawnienie_id from uprawnienia where uprawnienie = 'Pracownik'),
+"imie",
+"nazwisko"
+);
+
+-- Edycja konta przez admina
+-- Wartości "newlogin", "newhaslo" zmienić na potrzebne
+update dane_logowania 
+set login = "newlogin" 
+and haslo = "newhaslo" 
+where dane_logowania_id = (select dane_logowania_id from pracownik where pracownik_id = 1);
+
+-- Wartości "newadresemail", "newnumer", "newadres" zmienić na potrzebne
+update dane_kontaktowe 
+set adres_email = "newadresemail" 
+and numer_telefonu = "newnumer"  
+and adres = "newadres" 
+where dane_kontaktowe_id = (select dane_kontaktowe_id from pracownik where pracownik_id = 1);
+
+-- Wartości "newimie", "newnazwisko" zmienić na potrzebne
+update pracownik 
+set imie = "newimie" 
+and nazwisko = "newnazwisko" 
+where pracownik_id = 1;
