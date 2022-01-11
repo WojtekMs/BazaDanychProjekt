@@ -42,8 +42,8 @@ ON DELETE SET NULL;
 
 CREATE TABLE Dane_kontaktowe(
 	dane_kontaktowe_id INT PRIMARY KEY AUTO_INCREMENT,
-    adres_email VARCHAR(50),
-    numer_telefonu VARCHAR(15),
+    adres_email VARCHAR(50) UNIQUE,
+    numer_telefonu VARCHAR(15) UNIQUE,
     adres VARCHAR(100)
 );
 
@@ -106,7 +106,7 @@ CREATE TABLE Uprawnienia(
 -- haslo przechowywane w formie hashy (planowane 256 bitow)
 CREATE TABLE Dane_logowania(
 	dane_logowania_id INT PRIMARY KEY AUTO_INCREMENT,
-    login VARCHAR(20),
+    login VARCHAR(20) UNIQUE,
     haslo VARCHAR(100)
 );
 
