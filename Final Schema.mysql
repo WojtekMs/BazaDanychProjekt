@@ -178,6 +178,41 @@ FIELDS TERMINATED BY ';'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
+-- tworzenie konta pracownika
+CREATE USER 'pracownik'@'localhost' IDENTIFIED BY 'pracownik';
+-- przyznanie odpowiednich przywilejow pracownikowi:
+GRANT SELECT, UPDATE, DELETE ON sklep_rtv.kategorie TO 'pracownik'@'localhost';
+GRANT SELECT, UPDATE, DELETE ON sklep_rtv.modele TO 'pracownik'@'localhost';
+GRANT SELECT, UPDATE, DELETE ON sklep_rtv.producenci TO 'pracownik'@'localhost';
+GRANT SELECT, UPDATE, DELETE ON sklep_rtv.produkty TO 'pracownik'@'localhost';
+GRANT SELECT, UPDATE, DELETE ON sklep_rtv.wymiary TO 'pracownik'@'localhost';
+GRANT SELECT, UPDATE, DELETE ON sklep_rtv.zamowienie TO 'pracownik'@'localhost';
+
+-------------------------------------------------------------------------------
+
+-- tworzenie konta klienta w sklepie
+CREATE USER 'klient'@'localhost' IDENTIFIED BY 'klient';
+GRANT SELECT ON sklep_rtv.kategorie TO 'klient'@'localhost';
+GRANT SELECT ON sklep_rtv.modele TO 'klient'@'localhost';
+GRANT SELECT ON sklep_rtv.producenci TO 'klient'@'localhost';
+GRANT SELECT ON sklep_rtv.produkty TO 'klient'@'localhost';
+GRANT SELECT ON sklep_rtv.wymiary TO 'klient'@'localhost';
+
+-------------------------------------------------------------------------------
+
+-- tworzenie konta admina
+CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin';
+-- przyznanie wszystkich przywilejow adminowi
+GRANT ALL PRIVILEGES ON sklep_rtv.* TO 'admin'@'localhost';
+-- logowanie jako admin: w cmd przechodzicie do sciezki gdzie jest zainstalowany mysql
+-- w moim przypadku: C:\Program Files\MySQL\MySQL Server 8.0\bin
+-- u was pewnie jest podobnie, następnie wpisujemy ta komende: mysql --user=admin --password <nazwa bazy danych>
+
+-------------------------------------------------------------------------------
+
+-- wyswietlanie uzytkownikow
+SELECT user,host,plugin FROM mysql.user;
+
 -------------------------------------------------------------------------------
 
 -- wyszukiwanie po producencie (taki jaki jest w opisie)
@@ -217,42 +252,6 @@ VALUES (3, 121, 3, 120, 'Telewizor LG CX65', 13, 3799.99);
 
 SELECT * FROM zamowienie;
 
--------------------------------------------------------------------------------
-
--- tworzenie konta admina
-CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin';
--- przyznanie wszystkich przywilejow adminowi
-GRANT ALL PRIVILEGES ON sklep_rtv.* TO 'admin'@'localhost';
--- logowanie jako admin: w cmd przechodzicie do sciezki gdzie jest zainstalowany mysql
--- w moim przypadku: C:\Program Files\MySQL\MySQL Server 8.0\bin
--- u was pewnie jest podobnie, następnie wpisujemy ta komende: mysql --user=admin --password <nazwa bazy danych>
-
--------------------------------------------------------------------------------
-
--- tworzenie konta pracownika
-CREATE USER 'pracownik'@'localhost' IDENTIFIED BY 'pracownik';
--- przyznanie odpowiednich przywilejow pracownikowi:
-GRANT SELECT, UPDATE, DELETE ON sklep_rtv.kategorie TO 'pracownik'@'localhost';
-GRANT SELECT, UPDATE, DELETE ON sklep_rtv.modele TO 'pracownik'@'localhost';
-GRANT SELECT, UPDATE, DELETE ON sklep_rtv.producenci TO 'pracownik'@'localhost';
-GRANT SELECT, UPDATE, DELETE ON sklep_rtv.produkty TO 'pracownik'@'localhost';
-GRANT SELECT, UPDATE, DELETE ON sklep_rtv.wymiary TO 'pracownik'@'localhost';
-GRANT SELECT, UPDATE, DELETE ON sklep_rtv.zamowienie TO 'pracownik'@'localhost';
-
--------------------------------------------------------------------------------
-
--- tworzenie konta klienta w sklepie
-CREATE USER 'klient'@'localhost' IDENTIFIED BY 'klient';
-GRANT SELECT ON sklep_rtv.kategorie TO 'klient'@'localhost';
-GRANT SELECT ON sklep_rtv.modele TO 'klient'@'localhost';
-GRANT SELECT ON sklep_rtv.producenci TO 'klient'@'localhost';
-GRANT SELECT ON sklep_rtv.produkty TO 'klient'@'localhost';
-GRANT SELECT ON sklep_rtv.wymiary TO 'klient'@'localhost';
-
--------------------------------------------------------------------------------
-
--- wyswietlanie uzytkownikow
-SELECT user,host,plugin FROM mysql.user;
 
 -------------------------------------------------------------------------------
 
@@ -266,8 +265,10 @@ SELECT model_id, model FROM Modele WHERE model_id=1;
 SELECT * FROM Produkty;
 SELECT * FROM Modele;
 
--- usuwanie produktu (po product_id)
-SELECT produkt_id, opis FROM Produkty WHERE produkt_id=4;
+-- usuwanie produktu o produkt_id = 4 (po product_id)
+SELECT produkt_id, model_id, opis FROM Produkty WHERE produkt_id=4;
+SELECT model_id, model FROM Modele WHERE model_id=4;
+DELETE FROM Modele WHERE model_id IN (SELECT model_id FROM Produkty WHERE produkt_id=4);
 DELETE FROM Produkty WHERE produkt_id=4;
 SELECT produkt_id, opis FROM Produkty WHERE produkt_id=4;
 
@@ -299,6 +300,10 @@ DELETE FROM pracownik WHERE pracownik_id=@pracownik;
 
 -- Dodawanie konta przez admina
 -- Wartości "login", "haslo", "adres@mail.com", "+123123123123", "Wroclaw, Środmieście" zmienić na potrzebne
+SELECT * FROM dane_logowania;
+SELECT * FROM dane_kontaktowe;
+SELECT * FROM pracownik;
+SELECT * FROM dane_kontaktowe WHERE dane_kontaktowe_id IN (SELECT dane_kontaktowe_id FROM pracownik WHERE pracownik_id = 1);
 insert into dane_logowania(login, haslo) values ("login","haslo");
 insert into dane_kontaktowe(adres_email, numer_telefonu, adres) values ("adres@mail.com", "+123123123123","Wroclaw, Środmieście");
 insert into pracownik(dane_logowania_id, dane_kontaktowe_id, uprawnienie_id, imie, nazwisko) values(
@@ -312,19 +317,22 @@ insert into pracownik(dane_logowania_id, dane_kontaktowe_id, uprawnienie_id, imi
 -- Edycja konta przez admina
 -- Wartości "newlogin", "newhaslo" zmienić na potrzebne
 update dane_logowania 
-set login = "newlogin" 
-and haslo = "newhaslo" 
+set 
+	login = "newlogin", 
+	haslo = "newhaslo" 
 where dane_logowania_id = (select dane_logowania_id from pracownik where pracownik_id = 1);
 
 -- Wartości "newadresemail", "newnumer", "newadres" zmienić na potrzebne
 update dane_kontaktowe 
-set adres_email = "newadresemail" 
-and numer_telefonu = "newnumer"  
-and adres = "newadres" 
+set 
+	adres_email = "newadresemail", 
+	numer_telefonu = "newnumer",  
+	adres = "newadres" 
 where dane_kontaktowe_id = (select dane_kontaktowe_id from pracownik where pracownik_id = 1);
 
 -- Wartości "newimie", "newnazwisko" zmienić na potrzebne
 update pracownik 
-set imie = "newimie" 
-and nazwisko = "newnazwisko" 
+set 
+	imie = "newimie", 
+	nazwisko = "newnazwisko" 
 where pracownik_id = 1;
