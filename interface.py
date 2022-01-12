@@ -6,8 +6,10 @@ import argparse
 import mysql.connector
 from mysql.connector import FieldType
 
-from sklep.select import searching, select_product_between_prices, select_product_by_price, Operand, options
+from sklep.select import searching, select_product_between_prices, select_product_by_price, Operand, options, show_products
+from sklep.insert import adding_product
 from sklep.utils import pretty_print
+
 
 
 def main():
@@ -37,17 +39,40 @@ def main():
     pretty_print(description, rows)
     pretty_print(description2, rows2)
 
-    category = input("Podaj kategorie: ")
-    price_from = int(input("Podaj od jakiej kwoty wyszukiwac: "))
-    price_to = int(input("Podaj do jakiej kwoty wyszukiwac: "))
-    producer = input("Podaj producenta: ")
+    #testowanie wyszukiwania produktu
 
-    print("Wyszukane przez ciebie produkty: ")
+    #category = input("Podaj kategorie: ")
+    #price_from = int(input("Podaj od jakiej kwoty wyszukiwac: "))
+    #price_to = int(input("Podaj do jakiej kwoty wyszukiwac: "))
+    #producer = input("Podaj producenta: ")
 
-    description, rows = searching(cursor, category, price_from, price_to, producer)
+    #print("Wyszukane przez ciebie produkty: ")
+
+    #description, rows = searching(cursor, category, price_from, price_to, producer)
+    #pretty_print(description, rows)
+    #conn.close()
+
+    # testowanie dodawania produktu
+    #producer = input("Producent: ")
+    #model = input("Model urzadzenia: ")
+    #year_of_production = int(input("Rok produkcji: "))
+    #print("Podaj wymiary urzadzenia: ")
+    #height = int(input("Wysokosc: "))
+    #width = int(input("Szerokosc: "))
+    #depth = int(input("Glebokosc: "))
+    #category = input("Kategoria: ")
+    #name = input("Opis: ")
+    #quantity = int(input("Ilosc: "))
+    #price = float(input("Cena: "))
+
+    #print("Dodany przez ciebie produkt: ")
+
+    #adding_product(cursor, producer, model, year_of_production, height, width, depth,category, name, quantity, price)
+    description, rows = show_products(cursor)
     pretty_print(description, rows)
-    conn.close()
 
+    conn.commit() # sprawia ze zapisywane sa zmiany w bazie
+    conn.close()
 
 if __name__ == "__main__":
     main()

@@ -46,6 +46,11 @@ def searching(cursor, category, price_from, price_to, producer):
     rows = convert_types(rows)
     return cursor.description, rows
 
+def show_products(cursor):
+    cursor.execute("""SELECT opis, ilosc, cena FROM produkty""")
+    rows = cursor.fetchall()
+    rows = convert_types(rows)
+    return cursor.description, rows
 
 def options(cursor):
     print(
