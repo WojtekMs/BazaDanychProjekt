@@ -1,2 +1,5 @@
 venv
 venv-win
+__pycache__
+.vscode
+sklep.egg-info
