@@ -37,8 +37,15 @@ def main():
     pretty_print(description, rows)
     pretty_print(description2, rows2)
 
-    options(cursor)
+    category = input("Podaj kategorie: ")
+    price_from = int(input("Podaj od jakiej kwoty wyszukiwac: "))
+    price_to = int(input("Podaj do jakiej kwoty wyszukiwac: "))
+    producer = input("Podaj producenta: ")
 
+    print("Wyszukane przez ciebie produkty: ")
+
+    description, rows = searching(cursor, category, price_from, price_to, producer)
+    pretty_print(description, rows)
     conn.close()
 
 

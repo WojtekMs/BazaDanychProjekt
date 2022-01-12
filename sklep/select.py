@@ -32,11 +32,8 @@ def select_product_between_prices(cursor, min_price: float, max_price: float):
     return cursor.description, rows
 
 
-def searching(cursor):
-    category = input("Podaj kategorie: ")
-    price_from = int(input("Podaj od jakiej kwoty wyszukiwac: "))
-    price_to = int(input("Podaj do jakiej kwoty wyszukiwac: "))
-    producer = input("Podaj producenta: ")
+def searching(cursor, category, price_from, price_to, producer):
+
 
     cursor.execute("""
         SELECT opis, ilosc, cena FROM produkty 
@@ -44,8 +41,6 @@ def searching(cursor):
         AND cena > %s AND cena < %s
         AND producent_id IN (SELECT producent_id FROM producenci WHERE producent = '%s');
 """ % (category, price_from, price_to, producer))
-
-    print("Wyszukane przez ciebie produkty: ")
 
     rows = cursor.fetchall()
     rows = convert_types(rows)
@@ -63,3 +58,5 @@ def options(cursor):
         pretty_print(description, rows)
     if option == 2:
         print("Wybrales opcje Dodawanie produktu")
+        description, rows = searching(cursor)
+        pretty_print(description, rows)
