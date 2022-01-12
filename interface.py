@@ -42,8 +42,8 @@ def main():
     #testowanie wyszukiwania produktu
 
     #category = input("Podaj kategorie: ")
-    #price_from = int(input("Podaj od jakiej kwoty wyszukiwac: "))
-    #price_to = int(input("Podaj do jakiej kwoty wyszukiwac: "))
+    #price_from = float(input("Podaj od jakiej kwoty wyszukiwac: "))
+    #price_to = float(input("Podaj do jakiej kwoty wyszukiwac: "))
     #producer = input("Podaj producenta: ")
 
     #print("Wyszukane przez ciebie produkty: ")
@@ -68,8 +68,8 @@ def main():
     #print("Dodany przez ciebie produkt: ")
 
     #adding_product(cursor, producer, model, year_of_production, height, width, depth,category, name, quantity, price)
-    description, rows = show_products(cursor)
-    pretty_print(description, rows)
+    #description, rows = show_products(cursor)
+    #pretty_print(description, rows)
 
     conn.commit() # sprawia ze zapisywane sa zmiany w bazie
     conn.close()
