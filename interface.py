@@ -1,41 +1,19 @@
 #!/usr/bin/env python
 
-import MySQLdb
 import os
 import argparse
 
+import mysql.connector
+from mysql.connector import FieldType
 
-def options(conn):
-    print("Wybierz opcje:\n 1. Wyszukiwanie\n 2. Dodawanie produktu\n 3. Usuwanie produktu")
-    option = int(input("Podaj numer opcji: "))
-    if option == 1:
-        print("Wybrales opcje Wyszukiwanie")
-        searching(conn)
-    if option == 2:
-        print("Wybrales opcje Dodawanie produktu")
+from sklep.select import searching, select_product_between_prices, select_product_by_price, Operand, options
+from sklep.utils import pretty_print
 
-def searching(conn):
-    category = input("Podaj kategorie: ")
-    price_from = int(input("Podaj od jakiej kwoty wyszukiwac: "))
-    price_to = int(input("Podaj do jakiej kwoty wyszukiwac: "))
-    producer = input("Podaj producenta: ")
-
-    conn.query("""
-        SELECT opis, ilosc, cena FROM produkty 
-        WHERE kategorie_id IN (SELECT kategorie_id FROM kategorie WHERE kategoria = '%s')
-        AND cena > %s AND cena < %s
-        AND producent_id IN (SELECT producent_id FROM producenci WHERE producent = '%s');
-""" % (category, price_from, price_to, producer))
-
-    print("Wyszukane przez ciebie produkty: ")
-
-    result = conn.store_result()
-    for i in range(result.num_rows()):
-        print(result.fetch_row())
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("db", help="Nazwa twojej bazy danych (sklep_rtv, sklep)")
+    parser.add_argument("db",
+                        help="Nazwa twojej bazy danych (sklep_rtv, sklep)")
     args = parser.parse_args()
 
     host = 'localhost'
@@ -44,25 +22,25 @@ def main():
     password = os.environ["MYSQL_PASS"]
     db = args.db
 
-    conn = MySQLdb.Connection(
-        host=host,
-        user=user,
-        passwd=password,
-        port=port,
-        db=db
-    )
+    conn = mysql.connector.connect(host=host,
+                                   user=user,
+                                   password=password,
+                                   port=port,
+                                   database=db,
+                                   buffered=True,
+                                   raw=False)
 
-    options(conn)
+    cursor = conn.cursor()
 
-    # Example of how to insert new values:
-    #conn.query("INSERT INTO Uprawnienia (uprawnienie_id, uprawnienie) VALUES(31, 'admin')")
-    #conn.commit()
+    description, rows = select_product_by_price(cursor, 929, Operand.EQUAL)
+    description2, rows2 = select_product_between_prices(cursor, 929, 1872)
+    pretty_print(description, rows)
+    pretty_print(description2, rows2)
 
-    # Example of how to fetch table data:
-    #conn.query("SELECT * FROM Uprawnienia")
-    #result = conn.store_result()
-    #for i in range(result.num_rows()):
-    #    print(result.fetch_row())
+    options(cursor)
+
+    conn.close()
+
 
 if __name__ == "__main__":
     main()
