@@ -6,7 +6,7 @@ import argparse
 import mysql.connector
 from mysql.connector import FieldType
 
-from sklep.select import select_product_between_prices, select_product_by_price, Operand
+from sklep.select import searching, select_product_between_prices, select_product_by_price, Operand, options
 from sklep.utils import pretty_print
 
 
@@ -36,6 +36,8 @@ def main():
     description2, rows2 = select_product_between_prices(cursor, 929, 1872)
     pretty_print(description, rows)
     pretty_print(description2, rows2)
+
+    options(cursor)
 
     conn.close()
 
