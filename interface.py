@@ -8,6 +8,7 @@ from mysql.connector import FieldType
 
 from sklep.select import searching, select_product_between_prices, select_product_by_price, Operand, options, show_products
 from sklep.insert import adding_product
+from sklep.update import edit_product
 from sklep.utils import pretty_print
 
 
@@ -68,8 +69,17 @@ def main():
     #print("Dodany przez ciebie produkt: ")
 
     #adding_product(cursor, producer, model, year_of_production, height, width, depth,category, name, quantity, price)
-    #description, rows = show_products(cursor)
-    #pretty_print(description, rows)
+
+    #testowanie edytowania produktu (ilosc)
+    model = input("Podaj model produktu, ktory chcesz edytowac: ")
+    new_quantity = int(input("Podaj nowa ilosc: "))
+
+    edit_product(cursor, new_quantity, model)
+
+    description, rows = show_products(cursor)
+    pretty_print(description, rows)
+
+
 
     conn.commit() # sprawia ze zapisywane sa zmiany w bazie
     conn.close()

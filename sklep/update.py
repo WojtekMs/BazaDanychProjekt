@@ -7,12 +7,11 @@ from sklep.utils import convert_types, pretty_print
 
 from enum import Enum, auto
 
-def edit_product(cursor, producer, model, year_of_production, height, width, depth,
-                                       category, name, quantity, price):
+def edit_product(cursor, new_quantity, model):
     # edycja produktu
     cursor.execute("""
-        UPDATE Produkty SET ilosc = '%s' WHERE produkt_id='%s';
-""" % (quantity, model))
+        UPDATE Produkty SET ilosc = %s WHERE model_id IN (SELECT model_id FROM modele WHERE model = '%s');
+""" % (new_quantity, model))
     
     
 # -- edytowanie produktu (po produkt_id; zmieniamy ilość)
@@ -22,8 +21,8 @@ def edit_product(cursor, producer, model, year_of_production, height, width, dep
 
 
     #wyswietlenie dodanego produktu
-    cursor.execute("""SELECT opis, ilosc, cena FROM produkty ORDER BY produkt_id DESC LIMIT 1""")
+    #cursor.execute("""SELECT opis, ilosc, cena FROM produkty ORDER BY produkt_id DESC LIMIT 1""")
 
-    rows = cursor.fetchall()
-    rows = convert_types(rows)
-    return cursor.description, rows
+    #rows = cursor.fetchall()
+    #rows = convert_types(rows)
+    #return cursor.description, rows
