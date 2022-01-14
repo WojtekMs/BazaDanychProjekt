@@ -178,6 +178,8 @@ FIELDS TERMINATED BY ';'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
+-------------------------------------------------------------------------------
+
 -- tworzenie konta pracownika
 CREATE USER 'pracownik'@'localhost' IDENTIFIED BY 'pracownik';
 -- przyznanie odpowiednich przywilejow pracownikowi:
@@ -188,7 +190,6 @@ GRANT SELECT, UPDATE, DELETE ON sklep_rtv.produkty TO 'pracownik'@'localhost';
 GRANT SELECT, UPDATE, DELETE ON sklep_rtv.wymiary TO 'pracownik'@'localhost';
 GRANT SELECT, UPDATE, DELETE ON sklep_rtv.zamowienie TO 'pracownik'@'localhost';
 
--------------------------------------------------------------------------------
 
 -- tworzenie konta klienta w sklepie
 CREATE USER 'klient'@'localhost' IDENTIFIED BY 'klient';
@@ -198,7 +199,6 @@ GRANT SELECT ON sklep_rtv.producenci TO 'klient'@'localhost';
 GRANT SELECT ON sklep_rtv.produkty TO 'klient'@'localhost';
 GRANT SELECT ON sklep_rtv.wymiary TO 'klient'@'localhost';
 
--------------------------------------------------------------------------------
 
 -- tworzenie konta admina
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin';
@@ -274,17 +274,21 @@ SELECT produkt_id, opis FROM Produkty WHERE produkt_id=4;
 
 -------------------------------------------------------------------------------
 
--- edytowanie produktu (po produkt_id; zmieniamy ilość)
+-- edycja produktu (po produkt_id; zmieniamy ilość)
 SELECT opis, ilosc, cena FROM Produkty WHERE produkt_id=2;
 UPDATE Produkty SET ilosc = 11 WHERE produkt_id=2;
 SELECT opis, ilosc, cena FROM Produkty WHERE produkt_id=2;
+
+-------------------------------------------------------------------------------
 
 -- zamowienie produktu (wybieramy produkt za pomoca produkt_id)
 -- UWAGA: najpierw trzeba wykonac linijke z SET @produkt = 18; zeby to poprawnie zadzialalo 
 SET @produkt = 18;
 SELECT * FROM zamowienie;
 INSERT INTO zamowienie (produkt_id, kasa_id) VALUES(@produkt, rand() % 10);
- 
+
+-------------------------------------------------------------------------------
+
 -- usuwanie konta pracownika (wybieramy pracownik za pomoca pracownik_id)
 -- UWAGA: najpierw trzeba wykonac linijke z SET @pracownik =1; zeby to poprawnie zadzialalo 
 SET @pracownik = 13;
@@ -313,6 +317,8 @@ insert into pracownik(dane_logowania_id, dane_kontaktowe_id, uprawnienie_id, imi
 "imie",
 "nazwisko"
 );
+
+-------------------------------------------------------------------------------
 
 -- Edycja konta przez admina
 -- Wartości "newlogin", "newhaslo" zmienić na potrzebne
