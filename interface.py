@@ -72,19 +72,19 @@ def main():
     #adding_product(cursor, producer, model, year_of_production, height, width, depth,category, name, quantity, price)
 
     #testowanie edytowania produktu (ilosc)
-    #model = input("Podaj model produktu, ktory chcesz edytowac: ")
-    #new_quantity = int(input("Podaj nowa ilosc: "))
+    model = input("Podaj model produktu, ktory chcesz edytowac: ")
+    new_quantity = int(input("Podaj nowa ilosc: "))
 
-    #edit_product(cursor, new_quantity, model)
+    edit_product(cursor, new_quantity, model)
 
-    #description, rows = show_products(cursor)
-    #pretty_print(description, rows)
+    description, rows = show_products(cursor)
+    pretty_print(description, rows)
 
 
     # testowanie usuwania produktu po modelu
-    model = input("Podaj model urzadzenia, ktore chcesz usunac: ")
+    #model = input("Podaj model urzadzenia, ktore chcesz usunac: ")
 
-    deleting_product(cursor, model)
+    #deleting_product(cursor, model)
 
     conn.commit() # sprawia ze zapisywane sa zmiany w bazie
     conn.close()

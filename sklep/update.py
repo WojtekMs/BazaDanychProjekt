@@ -11,7 +11,10 @@ from enum import Enum, auto
 def edit_product(cursor, new_quantity, model):
     # edycja produktu
     cursor.execute("""
-        UPDATE Produkty SET ilosc = %s WHERE model_id IN (SELECT model_id FROM modele WHERE model = '%s');
+        UPDATE Produkty
+        INNER JOIN Modele ON Produkty.model_id=Modele.model_id
+        SET Produkty.ilosc = %s
+        WHERE Modele.model = '%s';
 """ % (new_quantity, model))
     
     
