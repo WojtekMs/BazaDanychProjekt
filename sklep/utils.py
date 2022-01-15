@@ -17,7 +17,8 @@ def pretty_print(description,
             col_width.append(regular_col_width)
         print(desc[0].ljust(col_width[id]), end='')
     line = '_' * sum(col_width)
-    print('\n', line)
+    print()
+    print(line)
     for row in rows:
         for col_id, value in enumerate(row):
             value_size = len(value)

@@ -70,3 +70,28 @@ def options(cursor):
         print("Wybrales opcje Dodawanie produktu")
         description, rows = searching(cursor)
         pretty_print(description, rows)
+
+
+def select_orders(cursor):
+    cursor.execute("SELECT * FROM zamowienie")
+    rows = cursor.fetchall()
+    rows = convert_types(rows)
+    return cursor.description, rows
+
+def select_employees(cursor):
+    cursor.execute("SELECT * FROM pracownik")
+    rows = cursor.fetchall()
+    rows = convert_types(rows)
+    return cursor.description, rows
+
+def select_contact_data(cursor):
+    cursor.execute("SELECT * FROM dane_kontaktowe")
+    rows = cursor.fetchall()
+    rows = convert_types(rows)
+    return cursor.description, rows
+
+def select_login_data(cursor):
+    cursor.execute("SELECT * FROM dane_logowania")
+    rows = cursor.fetchall()
+    rows = convert_types(rows)
+    return cursor.description, rows
