@@ -7,6 +7,7 @@ from sklep.utils import convert_types, pretty_print
 
 from enum import Enum, auto
 
+
 def edit_product(cursor, new_quantity, model):
     # edycja produktu
     cursor.execute("""

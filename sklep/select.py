@@ -36,21 +36,26 @@ def searching(cursor, category, price_from, price_to, producer):
 
 
     cursor.execute("""
-        SELECT opis, ilosc, cena FROM produkty 
-        WHERE kategorie_id IN (SELECT kategorie_id FROM kategorie WHERE kategoria = '%s')
-        AND cena > %s AND cena < %s
-        AND producent_id IN (SELECT producent_id FROM producenci WHERE producent = '%s');
+        SELECT opis, ilosc, cena
+FROM Produkty
+INNER JOIN Kategorie ON Produkty.kategorie_id=Kategorie.kategorie_id
+INNER JOIN Producenci ON Produkty.producent_id=Producenci.producent_id
+WHERE Kategorie.kategoria = '%s'
+AND cena > %s AND cena < %s
+AND Producenci.producent = '%s';
 """ % (category, price_from, price_to, producer))
 
     rows = cursor.fetchall()
     rows = convert_types(rows)
     return cursor.description, rows
 
+
 def show_products(cursor):
     cursor.execute("""SELECT opis, ilosc, cena FROM produkty""")
     rows = cursor.fetchall()
     rows = convert_types(rows)
     return cursor.description, rows
+
 
 def options(cursor):
     print(
