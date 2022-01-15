@@ -4,6 +4,7 @@
 from sklep.utils import convert_types, pretty_print
 
 from enum import Enum, auto
+import random
 
 def adding_product(cursor, producer, model, year_of_production, height, width, depth,
                                        category, name, quantity, price):
@@ -36,3 +37,7 @@ def adding_product(cursor, producer, model, year_of_production, height, width, d
     #rows = cursor.fetchall()
     #rows = convert_types(rows)
     #return cursor.description, rows
+
+def add_order(cursor, product_id):
+    
+    cursor.execute(f"INSERT INTO zamowienie (produkt_id, kasa_id) VALUES({product_id}, {random.randint(1, 10)});")
