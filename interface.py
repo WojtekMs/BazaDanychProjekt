@@ -12,7 +12,7 @@ from sklep.update import edit_product
 from sklep.utils import pretty_print
 from sklep.delete import deleting_product
 
-
+###############################################################################
 
 def main():
     parser = argparse.ArgumentParser()
@@ -41,6 +41,8 @@ def main():
     pretty_print(description, rows)
     pretty_print(description2, rows2)
 
+###############################################################################
+
     #testowanie wyszukiwania produktu
 
     #category = input("Podaj kategorie: ")
@@ -53,6 +55,8 @@ def main():
     #description, rows = searching(cursor, category, price_from, price_to, producer)
     #pretty_print(description, rows)
     #conn.close()
+
+###############################################################################
 
     # testowanie dodawania produktu
     #producer = input("Producent: ")
@@ -71,20 +75,25 @@ def main():
 
     #adding_product(cursor, producer, model, year_of_production, height, width, depth,category, name, quantity, price)
 
+###############################################################################
+
     #testowanie edytowania produktu (ilosc)
-    model = input("Podaj model produktu, ktory chcesz edytowac: ")
-    new_quantity = int(input("Podaj nowa ilosc: "))
+    #model = input("Podaj model produktu, ktory chcesz edytowac: ")
+    #new_quantity = int(input("Podaj nowa ilosc: "))
 
-    edit_product(cursor, new_quantity, model)
+    #edit_product(cursor, new_quantity, model)
 
-    description, rows = show_products(cursor)
-    pretty_print(description, rows)
+    #description, rows = show_products(cursor)
+    #pretty_print(description, rows)
 
+###############################################################################
 
     # testowanie usuwania produktu po modelu
     #model = input("Podaj model urzadzenia, ktore chcesz usunac: ")
 
     #deleting_product(cursor, model)
+
+###############################################################################
 
     conn.commit() # sprawia ze zapisywane sa zmiany w bazie
     conn.close()
