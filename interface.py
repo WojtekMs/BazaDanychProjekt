@@ -6,9 +6,9 @@ import argparse
 import mysql.connector
 from mysql.connector import FieldType
 
-from sklep.select import searching, select_product_between_prices, select_product_by_price, Operand, options, show_products
-from sklep.insert import adding_product
-from sklep.update import edit_product
+from sklep.select import searching, select_product_between_prices, select_product_by_price, Operand, options, show_products, show_workers
+from sklep.insert import adding_product, add_account_by_admin
+from sklep.update import edit_product, edit_account_by_admin
 from sklep.utils import pretty_print
 from sklep.delete import deleting_product
 
@@ -95,8 +95,43 @@ def main():
 
 ###############################################################################
 
-    conn.commit() # sprawia ze zapisywane sa zmiany w bazie
-    conn.close()
+    # testowanie dodawania pracownika
+    #login = input("Podaj login: ")
+    #password = input("Podaj haslo: ")
+    #email = input("Podaj e-mail: ")
+    #phnumber = input("Podaj numer telefonu: ")
+    #address = input("Podaj adres: ")
+    #auth = input("Podaj uprawnienie: ")
+    #first_name = input("Podaj imie: ")
+    #last_name = input("Podaj nazwisko: ")
 
+    #add_account_by_admin(cursor, login, password, email, phnumber, address, auth, first_name, last_name)
+
+    #description, rows = show_workers(cursor)
+    #pretty_print(description, rows)
+
+
+
+##############################################################################
+
+    # testowanie edycji danych pracownika
+    worker_id = int(input("Podaj id pracownika, ktorego chcesz edytowac: "))
+    newLogin = input("Podaj nowy login: ")
+    newPassword = input("Podaj nowe haslo: ")
+    newAdressEmail = input("Podaj nowy e-mail: ")
+    newPhnumber = input("Podaj nowy numer telefonu: ")
+    newAddress = input("Podaj nowy adres: ")
+    newName = input("Podaje nowe imie: ")
+    newSurname = input("Podaj nowe nazwisko: ")
+
+
+    edit_account_by_admin(cursor, newLogin, newPassword, worker_id, newAdressEmail, newPhnumber,
+                          newAddress, newName, newSurname)
+
+    description, rows = show_workers(cursor)
+    pretty_print(description, rows)
+
+    conn.commit()  # sprawia ze zapisywane sa zmiany w bazie
+    conn.close()
 if __name__ == "__main__":
     main()

@@ -51,7 +51,13 @@ AND Producenci.producent = '%s';
 
 
 def show_products(cursor):
-    cursor.execute("""SELECT opis, ilosc, cena FROM produkty""")
+    cursor.execute("""SELECT opis, ilosc, cena FROM produkty;""")
+    rows = cursor.fetchall()
+    rows = convert_types(rows)
+    return cursor.description, rows
+
+def show_workers(cursor):
+    cursor.execute("""SELECT imie, nazwisko FROM pracownik;""")
     rows = cursor.fetchall()
     rows = convert_types(rows)
     return cursor.description, rows
