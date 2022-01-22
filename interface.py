@@ -1,18 +1,18 @@
 #!/usr/bin/env python
 
-import os
 import argparse
 
 import mysql.connector
-from mysql.connector import FieldType
 
-from sklep.select import searching, select_product_between_prices, select_product_by_price, Operand, options, show_products, show_workers
-from sklep.insert import adding_product, add_account_by_admin
+from sklep.ConsoleView import ConsoleView, ACTION
+from sklep.select import searching, select_contact_data, select_employees, select_login_data, select_product_between_prices, select_product_by_price, Operand, options, show_products, show_workers, select_authentication
+from sklep.insert import adding_product, add_account_by_admin, add_product_get_input, add_product
 from sklep.update import edit_product, edit_account_by_admin
-from sklep.utils import pretty_print
+from sklep.utils import get_headers, get_safe_str_input, pretty_print, login, get_auth
 from sklep.delete import deleting_product
 
 ###############################################################################
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -20,28 +20,71 @@ def main():
                         help="Nazwa twojej bazy danych (sklep_rtv, sklep)")
     args = parser.parse_args()
 
+
+    user, password = login()
+
     host = 'localhost'
     port = 3306
-    user = 'root'
-    password = os.environ["MYSQL_PASS"]
+    user = user
+    password = password
     db = args.db
 
     conn = mysql.connector.connect(host=host,
-                                   user=user,
-                                   password=password,
-                                   port=port,
-                                   database=db,
-                                   buffered=True,
-                                   raw=False)
+                                user=user,
+                                password=password,
+                                port=port,
+                                database=db,
+                                buffered=True,
+                                raw=False)
 
     cursor = conn.cursor()
+    
 
-    description, rows = select_product_by_price(cursor, 929, Operand.EQUAL)
-    description2, rows2 = select_product_between_prices(cursor, 929, 1872)
-    pretty_print(description, rows)
-    pretty_print(description2, rows2)
+    auth = get_auth(user)
+    view = ConsoleView(auth)
+    view.display_menu()
+    action = view.choose_action()
+    if action == ACTION.SELECT_PRODUCT:
+        pass
+        # gather input
+        # perform query
+        # display result
+    elif action == ACTION.ADD_PRODUCT:
+        args = add_product_get_input()
+        add_product(cursor, args)
+        print("Produkt dodany!")
+    elif action == ACTION.ADD_ORDER:
+        pass
+        # gather input
+        # perform query
+        # display confirmation
+    elif action == ACTION.ADD_ACCOUNT:
+        pass
+        # gather input
+        # perform query
+        # display confirmation
+    elif action == ACTION.EDIT_PRODUCT:
+        pass
+        # gather input
+        # perform query
+        # display confirmation
+    elif action == ACTION.EDIT_ACCOUNT:
+        pass
+        # gather input
+        # perform query
+        # display confirmation
+    elif action == ACTION.DELETE_PRODUCT:
+        pass
+        # gather input
+        # perform query
+        # display confirmation
+    elif action == ACTION.DELETE_EMPLOYEE:
+        pass
+        # gather input
+        # perform query
+        # display confirmation
 
-###############################################################################
+    ###############################################################################
 
     #testowanie wyszukiwania produktu
 
@@ -56,7 +99,7 @@ def main():
     #pretty_print(description, rows)
     #conn.close()
 
-###############################################################################
+    ###############################################################################
 
     # testowanie dodawania produktu
     #producer = input("Producent: ")
@@ -75,7 +118,7 @@ def main():
 
     #adding_product(cursor, producer, model, year_of_production, height, width, depth,category, name, quantity, price)
 
-###############################################################################
+    ###############################################################################
 
     #testowanie edytowania produktu (ilosc)
     #model = input("Podaj model produktu, ktory chcesz edytowac: ")
@@ -86,14 +129,14 @@ def main():
     #description, rows = show_products(cursor)
     #pretty_print(description, rows)
 
-###############################################################################
+    ###############################################################################
 
     # testowanie usuwania produktu po modelu
     #model = input("Podaj model urzadzenia, ktore chcesz usunac: ")
 
     #deleting_product(cursor, model)
 
-###############################################################################
+    ###############################################################################
 
     # testowanie dodawania pracownika
     #login = input("Podaj login: ")
@@ -110,28 +153,34 @@ def main():
     #description, rows = show_workers(cursor)
     #pretty_print(description, rows)
 
-
-
-##############################################################################
+    ##############################################################################
 
     # testowanie edycji danych pracownika
-    worker_id = int(input("Podaj id pracownika, ktorego chcesz edytowac: "))
-    newLogin = input("Podaj nowy login: ")
-    newPassword = input("Podaj nowe haslo: ")
-    newAdressEmail = input("Podaj nowy e-mail: ")
-    newPhnumber = input("Podaj nowy numer telefonu: ")
-    newAddress = input("Podaj nowy adres: ")
-    newName = input("Podaje nowe imie: ")
-    newSurname = input("Podaj nowe nazwisko: ")
+    # worker_id = int(input("Podaj id pracownika, ktorego chcesz edytowac: "))
+    # newLogin = input("Podaj nowy login: ")
+    # newPassword = input("Podaj nowe haslo: ")
+    # newAdressEmail = input("Podaj nowy e-mail: ")
+    # newPhnumber = input("Podaj nowy numer telefonu: ")
+    # newAddress = input("Podaj nowy adres: ")
+    # newName = input("Podaje nowe imie: ")
+    # newSurname = input("Podaj nowe nazwisko: ")
 
+    # edit_account_by_admin(cursor, newLogin, newPassword, worker_id, newAdressEmail, newPhnumber,
+    #                       newAddress, newName, newSurname)
 
-    edit_account_by_admin(cursor, newLogin, newPassword, worker_id, newAdressEmail, newPhnumber,
-                          newAddress, newName, newSurname)
-
-    description, rows = show_workers(cursor)
-    pretty_print(description, rows)
+    # description, rows = show_workers(cursor)
+    # pretty_print(description, rows)
 
     conn.commit()  # sprawia ze zapisywane sa zmiany w bazie
     conn.close()
+
+
+# NOTATKI 22.01.2022
+# bardzo wazne, zeby zwracac uwage na typ danych, ktore sa wprowadzane, za pomoca parametru do funkcji get_typed_input [w pliku sklep.utils]
+# gdy input jest typu str, nalezy go poprawnie zwalidowac aby uniknac SQL injection za pomoca funkcji get_safe_str_input [w pliku sklep.utils]
+# w zaleznosci od uzytkownika rozne akcje sa mozliwe do wykonania
+# TODO:
+# - podczas edytowania pracownika lepiej podac uprawnienie po nazwie, a nie po id
+# - dodac kod do pozostalych akcji oprocz ACTION.SELECT_PRODUCT wzorujac sie na ACTION.ADD_PRODUCT
 if __name__ == "__main__":
     main()

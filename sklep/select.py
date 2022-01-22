@@ -101,3 +101,9 @@ def select_login_data(cursor):
     rows = cursor.fetchall()
     rows = convert_types(rows)
     return cursor.description, rows
+
+def select_authentication(cursor):
+    cursor.execute("SELECT * FROM uprawnienia")
+    rows = cursor.fetchall()
+    rows = convert_types(rows)
+    return cursor.description, rows

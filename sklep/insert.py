@@ -1,7 +1,7 @@
 # tutaj scenariusz uzycia:
 # - dodawanie produktu
 # - zamowienie produktu
-from sklep.utils import convert_types, pretty_print
+from sklep.utils import convert_types, pretty_print, get_typed_input, get_safe_str_input
 
 from enum import Enum, auto
 import random
@@ -32,12 +32,25 @@ def adding_product(cursor, producer, model, year_of_production, height, width, d
 '%s', %s, %s);
 """ % (producer, model, category, name, quantity, price))
 
-    #wyswietlenie dodanego produktu
-    #cursor.execute("""SELECT opis, ilosc, cena FROM produkty ORDER BY produkt_id DESC LIMIT 1""")
+def add_product(cursor, args):
+    adding_product(cursor, args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9])
 
-    #rows = cursor.fetchall()
-    #rows = convert_types(rows)
-    #return cursor.description, rows
+def add_product_get_input():
+    print("Dodaj produkt\n")
+    producer = get_safe_str_input("Producent: ")
+    model = get_safe_str_input("Model urzadzenia: ")
+    year_of_production = get_typed_input("Rok produkcji: ", int)
+    print("Podaj wymiary urzadzenia: ")
+    height = get_typed_input("Wysokosc: ", int)
+    width = get_typed_input("Szerokosc: ", int)
+    depth = get_typed_input("Glebokosc: ", int)
+    category = get_safe_str_input("Kategoria: ")
+    name = get_safe_str_input("Opis: ")
+    quantity = get_typed_input("Ilosc: ", int)
+    price = get_typed_input("Cena: ", float)
+    print()
+    return (producer, model, year_of_production, height, width, depth, category, name, quantity, price)
+
 
 def add_order(cursor, product_id):
     
@@ -62,3 +75,5 @@ def add_account_by_admin(cursor, login, password, email, phnumber, address, auth
         (SELECT uprawnienie_id FROM uprawnienia WHERE uprawnienie = '%s'),
         '%s', '%s');
     """ % (login, email, auth, first_name, last_name))
+
+
