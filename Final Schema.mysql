@@ -183,12 +183,12 @@ IGNORE 1 ROWS;
 -- tworzenie konta pracownika
 CREATE USER 'pracownik'@'localhost' IDENTIFIED BY 'pracownik';
 -- przyznanie odpowiednich przywilejow pracownikowi:
-GRANT SELECT, UPDATE, DELETE ON sklep_rtv.kategorie TO 'pracownik'@'localhost';
-GRANT SELECT, UPDATE, DELETE ON sklep_rtv.modele TO 'pracownik'@'localhost';
-GRANT SELECT, UPDATE, DELETE ON sklep_rtv.producenci TO 'pracownik'@'localhost';
-GRANT SELECT, UPDATE, DELETE ON sklep_rtv.produkty TO 'pracownik'@'localhost';
-GRANT SELECT, UPDATE, DELETE ON sklep_rtv.wymiary TO 'pracownik'@'localhost';
-GRANT SELECT, UPDATE, DELETE ON sklep_rtv.zamowienie TO 'pracownik'@'localhost';
+GRANT SELECT, UPDATE, DELETE, INSERT ON sklep_rtv.kategorie TO 'pracownik'@'localhost';
+GRANT SELECT, UPDATE, DELETE, INSERT ON sklep_rtv.modele TO 'pracownik'@'localhost';
+GRANT SELECT, UPDATE, DELETE, INSERT ON sklep_rtv.producenci TO 'pracownik'@'localhost';
+GRANT SELECT, UPDATE, DELETE, INSERT ON sklep_rtv.produkty TO 'pracownik'@'localhost';
+GRANT SELECT, UPDATE, DELETE, INSERT ON sklep_rtv.wymiary TO 'pracownik'@'localhost';
+GRANT SELECT, UPDATE, DELETE, INSERT ON sklep_rtv.zamowienie TO 'pracownik'@'localhost';
 
 
 -- tworzenie konta klienta w sklepie
