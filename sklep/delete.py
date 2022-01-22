@@ -15,6 +15,17 @@ def deleting_product(cursor, model):
     INNER JOIN Modele ON Produkty.model_id=Modele.model_id
     WHERE Modele.model = '%s';
     """ % (model))
+    
+    
+def del_product(cursor, args):
+    deleting_product(cursor, args[0])
+    
+    
+def del_product_get_input():
+    print("Usun produkt\n")
+    model = get_safe_str_input("Model urzadzenia: ")
+    print()
+    return (model)
 
 ###############################################################################
 

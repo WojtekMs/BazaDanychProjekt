@@ -64,20 +64,26 @@ def main():
         # perform query
         # display confirmation
     elif action == ACTION.EDIT_PRODUCT:
-        pass
+        #pass
         # gather input
+        args = ed_product_get_input()
         # perform query
+        ed_product(cursor, args)
         # display confirmation
+        print("Produkt zostal zedytowany!")
     elif action == ACTION.EDIT_ACCOUNT:
         pass
         # gather input
         # perform query
         # display confirmation
     elif action == ACTION.DELETE_PRODUCT:
-        pass
+        #pass
         # gather input
+        args = del_product_get_input()
         # perform query
+        del_product(cursor, args)
         # display confirmation
+        print("Produkt usuniety!")
     elif action == ACTION.DELETE_EMPLOYEE:
         pass
         # gather input

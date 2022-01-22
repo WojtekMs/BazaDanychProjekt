@@ -16,6 +16,19 @@ def edit_product(cursor, new_quantity, model):
 """ % (new_quantity, model))
 
 
+def ed_product(cursor, args):
+    edit_product(cursor, args[0], args[1])
+
+
+def ed_product_get_input():
+    print("Edytuj produkt\n")
+    model = get_safe_str_input("Model urzadzenia: ")
+    quantity = get_typed_input("Ilosc: ", int)
+    print()
+    return (model, quantity)
+
+###############################################################################
+
 # Edycja konta przez admina
 def edit_account_by_admin(cursor, newLogin, newPassword, worker_id, newAdressEmail, newPhnumber,
                           newAddress, newName, newSurname):

@@ -7,6 +7,8 @@ from enum import Enum, auto
 import random
 import hashlib
 
+###############################################################################
+
 def adding_product(cursor, producer, model, year_of_production, height, width, depth,
                                        category, name, quantity, price):
     #dodanie do tabeli Modele
@@ -32,8 +34,10 @@ def adding_product(cursor, producer, model, year_of_production, height, width, d
 '%s', %s, %s);
 """ % (producer, model, category, name, quantity, price))
 
+
 def add_product(cursor, args):
     adding_product(cursor, args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9])
+
 
 def add_product_get_input():
     print("Dodaj produkt\n")
@@ -51,10 +55,13 @@ def add_product_get_input():
     print()
     return (producer, model, year_of_production, height, width, depth, category, name, quantity, price)
 
+###############################################################################
 
 def add_order(cursor, product_id):
     
     cursor.execute(f"INSERT INTO zamowienie (produkt_id, kasa_id) VALUES({product_id}, {random.randint(1, 10)});")
+
+###############################################################################
 
 # Dodawanie konta przez admina
 def add_account_by_admin(cursor, login, password, email, phnumber, address, auth, first_name, last_name):
