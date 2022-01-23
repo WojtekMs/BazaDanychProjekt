@@ -59,40 +59,24 @@ def main():
         # perform query
         # display confirmation
     elif action == ACTION.ADD_ACCOUNT:
-        #pass
-        # gather input
         args = add_account_get_input()
-        # perform query
         add_account(cursor, args)
-        # display confirmation
         print("Konto zostalo dodane!")
     elif action == ACTION.EDIT_PRODUCT:
-        #pass
-        # gather input
         args = ed_product_get_input()
-        # perform query
         ed_product(cursor, args)
-        # display confirmation
         print("Produkt zostal zedytowany!")
     elif action == ACTION.EDIT_ACCOUNT:
         args = edit_account_get_input()
         edit_account(cursor, args)
         print("Konto zostało zedytowane")
     elif action == ACTION.DELETE_PRODUCT:
-        #pass
-        # gather input
         args = del_product_get_input()
-        # perform query
         del_product(cursor, args)
-        # display confirmation
         print("Produkt usuniety!")
     elif action == ACTION.DELETE_EMPLOYEE:
-        #pass
-        # gather input
         args = del_employee_get_input()
-        # perform query
         del_employee(cursor, args)
-        # display confirmation
         print("Konto zostalo usuniete!")
 
     ###############################################################################
@@ -193,5 +177,12 @@ def main():
 # TODO:
 # - podczas edytowania pracownika lepiej podac uprawnienie po nazwie, a nie po id
 # - dodac kod do pozostalych akcji oprocz ACTION.SELECT_PRODUCT wzorujac sie na ACTION.ADD_PRODUCT
+
+# NOTATKI 23.01.2022
+# - co w sytuacji gdy chce edytowac produkt, ktorego nie ma w bazie danych? [aktualnie wyswietla tylko OK]
+# - czy powinnismy dbac o to, zeby e-mail i uprawnienia byly poprawne?
+# - należy dodać ROLE odpowiadajace: klientowi, pracownikowi, adminowi
+# - dodawanie konta powinno robic CREATE USER WITH ROLE
+# - usuwanie konta powinno robic DELETE USER
 if __name__ == "__main__":
     main()

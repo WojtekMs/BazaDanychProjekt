@@ -17,10 +17,9 @@ def get_headers(description):
 def pretty_print(description: list, rows: list, end='\n'):
     print(tabulate(rows, headers=get_headers(description), tablefmt='psql'), end=end)
 
-def login() -> tuple:
-    print("Logowanie")
-    username = input("Podaj nazwe uzytkownika: ")
-    password = getpass(prompt="Podaj haslo: ")
+def login(login_prompt = "Podaj nazwe uzytkownika: ", password_prompt = "Podaj haslo: ") -> tuple:
+    username = get_typed_input(login_prompt, str)
+    password = getpass(prompt=password_prompt)
     return username, password
 
 def get_auth(user: str) -> AUTH:

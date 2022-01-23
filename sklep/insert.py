@@ -1,7 +1,7 @@
 # tutaj scenariusz uzycia:
 # - dodawanie produktu
 # - zamowienie produktu
-from sklep.utils import convert_types, pretty_print, get_typed_input, get_safe_str_input
+from sklep.utils import convert_types, pretty_print, get_typed_input, get_safe_str_input, login
 
 from enum import Enum, auto
 import random
@@ -91,13 +91,12 @@ def add_account(cursor, args):
 def add_account_get_input():
     print("Dodaj Konto\n")
     print("Wprowadz Dane: \n")
-    login = get_safe_str_input("Login: ")
-    password = get_safe_str_input("Haslo: ")
+    user, password = login()
     email = get_safe_str_input("Email: ")
-    phnumber = get_safe_str_input("Model urzadzenia: ")
-    address = get_typed_input("Adres: ")
+    phnumber = get_safe_str_input("Numer telefonu: ")
+    address = get_safe_str_input("Adres: ")
     auth = get_safe_str_input("Uprawnienia: ")
-    first_name = get_typed_input("Imie: ")
-    last_name = get_typed_input("Nazwisko: ")
+    first_name = get_safe_str_input("Imie: ")
+    last_name = get_safe_str_input("Nazwisko: ")
     print()
-    return (login, password, email, phnumber, address, auth, first_name, last_name)
+    return (user, password, email, phnumber, address, auth, first_name, last_name)

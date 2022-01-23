@@ -1,7 +1,7 @@
 # tutaj scenariusz uzycia:
 # - edycja produktu
 
-from sklep.utils import convert_types, pretty_print, get_typed_input, get_safe_str_input
+from sklep.utils import convert_types, pretty_print, get_typed_input, get_safe_str_input, login
 
 from enum import Enum, auto
 
@@ -25,7 +25,7 @@ def ed_product_get_input():
     model = get_safe_str_input("Model urzadzenia: ")
     quantity = get_typed_input("Ilosc: ", int)
     print()
-    return (model, quantity)
+    return (quantity, model)
 
 ###############################################################################
 
@@ -66,14 +66,13 @@ def edit_account(cursor, args):
 def edit_account_get_input():
     print("Edytuj konto\n")
     print("Wprowadz Dane: \n")
-    worker_id = get_typed_input("Id pracownika", int)
-    newLogin = get_safe_str_input("Nowy login: ")
-    newPassword = get_safe_str_input("Nowe haslo: ")
+    worker_id = get_typed_input("Id pracownika: ", int)
+    newUser, newPassword = login(login_prompt="Nowa nazwa użytkownika: ", password_prompt="Nowe hasło: ")
     newAdressEmail = get_safe_str_input("Nowy adres email: ")
-    newPhnumber = get_safe_str_input("Nowy numer telefonu: ")
-    newAddress = get_typed_input("Nowy adres: ")
-    newName = get_typed_input("Nowe imie: ")
-    newSurname = get_typed_input("Nowe nazwisko: ")
+    newPhnumber = get_typed_input("Nowy numer telefonu: ", int)
+    newAddress = get_safe_str_input("Nowy adres: ")
+    newName = get_safe_str_input("Nowe imie: ")
+    newSurname = get_safe_str_input("Nowe nazwisko: ")
     print()
-    return (newLogin, newPassword, worker_id, newAdressEmail, newPhnumber,
+    return (newUser, newPassword, worker_id, newAdressEmail, newPhnumber,
             newAddress,newName, newSurname)

@@ -46,6 +46,6 @@ def del_employee(cursor, args):
     
 def del_employee_get_input():
     print("Usun Konto\n")
-    employee_id = get_safe_str_input("ID Pracownika: ")
+    employee_id = get_typed_input("ID Pracownika: ", int)
     print()
     return (employee_id)
