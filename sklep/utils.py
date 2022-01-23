@@ -15,7 +15,7 @@ def get_headers(description):
     return [col[0] for col in description]
 
 def pretty_print(description: list, rows: list, end='\n'):
-    print(tabulate(rows, headers=get_headers(description), tablefmt='psql'), end=end)
+    print(tabulate(rows, headers=get_headers(description), tablefmt='pretty'), end=end)
 
 def login(login_prompt = "Podaj nazwe uzytkownika: ", password_prompt = "Podaj haslo: ") -> tuple:
     username = get_typed_input(login_prompt, str)
@@ -51,3 +51,19 @@ def get_safe_str_input(prompt):
         print("SQL Injection jest zabronione!")
         data = get_typed_input(prompt, str)
     return data
+
+def choose_one_of(actions: list):
+    for action in actions:
+        print(action)
+    action_number = get_typed_input("Twój wybór: ", int)
+    while action_number < 1 or action_number > len(actions):
+        print("Nieprawidłowy wybór!")
+        action_number = get_typed_input("Twój wybór: ", int)
+    return actions[action_number - 1]
+
+
+def execute_query(cursor, query: str):
+    cursor.execute(query)
+    rows = cursor.fetchall()
+    rows = convert_types(rows)
+    return cursor.description, rows
