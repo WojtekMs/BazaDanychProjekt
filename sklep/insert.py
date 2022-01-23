@@ -82,5 +82,22 @@ def add_account_by_admin(cursor, login, password, email, phnumber, address, auth
         (SELECT uprawnienie_id FROM uprawnienia WHERE uprawnienie = '%s'),
         '%s', '%s');
     """ % (login, email, auth, first_name, last_name))
+    
+    
+def add_account(cursor, args):
+    add_account_by_admin(cursor, args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7])
 
 
+def add_account_get_input():
+    print("Dodaj Konto\n")
+    print("Wprowadz Dane: \n")
+    login = get_safe_str_input("Login: ")
+    password = get_safe_str_input("Haslo: ")
+    email = get_safe_str_input("Email: ")
+    phnumber = get_safe_str_input("Model urzadzenia: ")
+    address = get_typed_input("Adres: ")
+    auth = get_safe_str_input("Uprawnienia: ")
+    first_name = get_typed_input("Imie: ")
+    last_name = get_typed_input("Nazwisko: ")
+    print()
+    return (login, password, email, phnumber, address, auth, first_name, last_name)

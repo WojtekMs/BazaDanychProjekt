@@ -59,10 +59,13 @@ def main():
         # perform query
         # display confirmation
     elif action == ACTION.ADD_ACCOUNT:
-        pass
+        #pass
         # gather input
+        args = add_account_get_input()
         # perform query
+        add_account(cursor, args)
         # display confirmation
+        print("Konto zostalo dodane!")
     elif action == ACTION.EDIT_PRODUCT:
         #pass
         # gather input
@@ -85,10 +88,13 @@ def main():
         # display confirmation
         print("Produkt usuniety!")
     elif action == ACTION.DELETE_EMPLOYEE:
-        pass
+        #pass
         # gather input
+        args = del_employee_get_input()
         # perform query
+        del_employee(cursor, args)
         # display confirmation
+        print("Konto zostalo usuniete!")
 
     ###############################################################################
 
