@@ -75,7 +75,6 @@ def main():
         # display confirmation
         print("Produkt zostal zedytowany!")
     elif action == ACTION.EDIT_ACCOUNT:
-        pass
         args = edit_account_get_input()
         edit_account(cursor, args)
         print("Konto zostało zedytowane")
