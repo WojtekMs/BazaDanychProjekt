@@ -6,7 +6,7 @@ import mysql.connector
 
 from sklep.ConsoleView import ConsoleView, ACTION
 from sklep.select import searching, select_contact_data, select_employees, select_login_data, select_product_between_prices, select_product_by_price, Operand, options, show_products, show_workers, select_authentication
-from sklep.insert import add_product_get_input, add_product, add_account_get_input, add_account
+from sklep.insert import add_product_get_input, add_product, add_account_get_input, add_account, add_order_get_input, add_order
 from sklep.update import ed_product_get_input, ed_product, edit_account_by_admin, edit_account_get_input, edit_account
 from sklep.utils import get_headers, get_safe_str_input, pretty_print, login, get_auth
 from sklep.delete import del_product_get_input, del_product, del_employee_get_input, del_employee
@@ -54,10 +54,9 @@ def main():
         add_product(cursor, args)
         print("Produkt dodany!")
     elif action == ACTION.ADD_ORDER:
-        pass
-        # gather input
-        # perform query
-        # display confirmation
+        args = add_order_get_input()
+        add_order(cursor, args)
+        print("Produnkt zamówiony!")
     elif action == ACTION.ADD_ACCOUNT:
         args = add_account_get_input()
         add_account(cursor, args)

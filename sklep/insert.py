@@ -58,8 +58,14 @@ def add_product_get_input():
 ###############################################################################
 
 def add_order(cursor, product_id):
-    
     cursor.execute(f"INSERT INTO zamowienie (produkt_id, kasa_id) VALUES({product_id}, {random.randint(1, 10)});")
+
+def add_ord(cursor, arg):
+    add_order(cursor, arg)
+
+def add_order_get_input():
+    product_id = get_typed_input("Podaj numer ID produktu, który chcesz zamówić: ", int)
+    return(product_id)
 
 ###############################################################################
 
