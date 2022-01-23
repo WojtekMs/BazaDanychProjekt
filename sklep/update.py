@@ -1,7 +1,7 @@
 # tutaj scenariusz uzycia:
 # - edycja produktu
 
-from sklep.utils import convert_types, pretty_print
+from sklep.utils import convert_types, pretty_print, get_typed_input, get_safe_str_input
 
 from enum import Enum, auto
 
@@ -58,3 +58,22 @@ def edit_account_by_admin(cursor, newLogin, newPassword, worker_id, newAdressEma
         nazwisko = '%s'
         WHERE pracownik_id = %s;
     """ % (newName, newSurname, worker_id))
+
+
+def edit_account(cursor, args):
+    edit_account_by_admin(cursor, args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7])
+
+def edit_account_get_input():
+    print("Edytuj konto\n")
+    print("Wprowadz Dane: \n")
+    worker_id = get_typed_input("Id pracownika", int)
+    newLogin = get_safe_str_input("Nowy login: ")
+    newPassword = get_safe_str_input("Nowe haslo: ")
+    newAdressEmail = get_safe_str_input("Nowy adres email: ")
+    newPhnumber = get_safe_str_input("Nowy numer telefonu: ")
+    newAddress = get_typed_input("Nowy adres: ")
+    newName = get_typed_input("Nowe imie: ")
+    newSurname = get_typed_input("Nowe nazwisko: ")
+    print()
+    return (newLogin, newPassword, worker_id, newAdressEmail, newPhnumber,
+            newAddress,newName, newSurname)

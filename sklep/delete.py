@@ -2,7 +2,7 @@
 # - usuwanie produktu
 # - usuwanie konta pracownika przez admina
 
-from sklep.utils import convert_types, pretty_print
+from sklep.utils import convert_types, pretty_print, get_typed_input, get_safe_str_input
 
 from enum import Enum, auto
 
