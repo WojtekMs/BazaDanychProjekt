@@ -198,6 +198,7 @@ GRANT SELECT ON sklep_rtv.modele TO 'klient'@'localhost';
 GRANT SELECT ON sklep_rtv.producenci TO 'klient'@'localhost';
 GRANT SELECT ON sklep_rtv.produkty TO 'klient'@'localhost';
 GRANT SELECT ON sklep_rtv.wymiary TO 'klient'@'localhost';
+GRANT INSERT ON sklep_rtv.zamowienie TO 'klient'@'localhost';
 
 
 -- tworzenie konta admina
