@@ -98,10 +98,8 @@ def main():
 # - co w sytuacji gdy chce edytowac produkt, ktorego nie ma w bazie danych? [aktualnie wyswietla tylko OK]
 # - czy powinnismy dbac o to, zeby e-mail i uprawnienia byly poprawne?
 # - czy numer telefonu powinien byc int?
-# - usuwanie konta powinno robic DELETE USER
 # - aktualnie nie wiadomo czemu, trzeba dodac na koncu \r zeby poprawnie wyszukac kategorie!
 
 # NOTATKI 24.01.2022
-# - zrobic wyswietlanie wszystkich pracownikow
 if __name__ == "__main__":
     main()
