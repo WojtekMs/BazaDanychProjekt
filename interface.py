@@ -46,8 +46,8 @@ def main():
             print("Produkt dodany!")
         elif action == ACTION.ADD_ORDER:
             args = add_order_get_input()
-            add_order(cursor, args)
-            print("Produkt zamówiony!")
+            desk_nr = add_order(cursor, args)
+            print(f"Produkt zamówiony w kasie nr {desk_nr}!")
         elif action == ACTION.ADD_ACCOUNT:
             args = add_account_get_input()
             add_account(cursor, args)

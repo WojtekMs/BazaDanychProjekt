@@ -63,9 +63,11 @@ def add_product_get_input():
 
 
 def add_order(cursor, product_id):
+    cash_desk_nr = random.randint(1, 10)
     cursor.execute(
-        f"INSERT INTO zamowienie (produkt_id, kasa_id) VALUES({product_id}, {random.randint(1, 10)});"
+        f"INSERT INTO zamowienie (produkt_id, kasa_id) VALUES({product_id}, {cash_desk_nr});"
     )
+    return cash_desk_nr
 
 
 def add_ord(cursor, arg):
