@@ -8,7 +8,7 @@ from sklep.ConsoleView import ConsoleView, ACTION
 from sklep.select import searching, select_contact_data, select_employees, select_login_data, select_product_between_prices, select_product_by_price, Operand, options, select_product_get_input, show_products, show_workers, select_authentication, select_product_get_query
 from sklep.insert import add_product_get_input, add_product, add_account_get_input, add_account, add_order_get_input, add_order
 from sklep.update import ed_product_get_input, ed_product, edit_account_by_admin, edit_account_get_input, edit_account
-from sklep.utils import execute_query, get_headers, get_safe_str_input, pretty_print, login, get_auth
+from sklep.utils import choose_one_of, execute_query, get_headers, get_safe_str_input, pretty_print, login, get_auth, connect
 from sklep.delete import del_product_get_input, del_product, del_employee_get_input, del_employee
 
 ###############################################################################
@@ -20,30 +20,20 @@ def main():
                         help="Nazwa twojej bazy danych (sklep_rtv, sklep)")
     args = parser.parse_args()
 
+    choice = choose_one_of(["1. Logowanie", "2. Dostep klienta"])
+    if choice == "1. Logowanie":
+        user, password = login()
+    else:
+        user, password = "klient", ""
 
-    user, password = login()
-
-    host = 'localhost'
-    port = 3306
-    user = user
-    password = password
-    db = args.db
-
-    conn = mysql.connector.connect(host=host,
-                                user=user,
-                                password=password,
-                                port=port,
-                                database=db,
-                                buffered=True,
-                                raw=False)
-
+    conn = connect(user=user, password=password, db=args.db)
     cursor = conn.cursor()
     
-
-    auth = get_auth(user)
+    auth = get_auth(cursor, user)
     view = ConsoleView(auth)
     view.display_menu()
     action = view.choose_action()
+
     while action != ACTION.QUIT:
         if action == ACTION.SELECT_PRODUCT:
             args = select_product_get_input()

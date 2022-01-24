@@ -9,8 +9,9 @@ import hashlib
 
 ###############################################################################
 
-def adding_product(cursor, producer, model, year_of_production, height, width, depth,
-                                       category, name, quantity, price):
+
+def adding_product(cursor, producer, model, year_of_production, height, width,
+                   depth, category, name, quantity, price):
     #dodanie do tabeli Modele
     cursor.execute("""
         INSERT INTO modele (producent_id, model, rok_produkcji)
@@ -36,7 +37,8 @@ def adding_product(cursor, producer, model, year_of_production, height, width, d
 
 
 def add_product(cursor, args):
-    adding_product(cursor, args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9])
+    adding_product(cursor, args[0], args[1], args[2], args[3], args[4],
+                   args[5], args[6], args[7], args[8], args[9])
 
 
 def add_product_get_input():
@@ -53,24 +55,35 @@ def add_product_get_input():
     quantity = get_typed_input("Ilosc: ", int)
     price = get_typed_input("Cena: ", float)
     print()
-    return (producer, model, year_of_production, height, width, depth, category, name, quantity, price)
+    return (producer, model, year_of_production, height, width, depth,
+            category, name, quantity, price)
+
 
 ###############################################################################
 
+
 def add_order(cursor, product_id):
-    cursor.execute(f"INSERT INTO zamowienie (produkt_id, kasa_id) VALUES({product_id}, {random.randint(1, 10)});")
+    cursor.execute(
+        f"INSERT INTO zamowienie (produkt_id, kasa_id) VALUES({product_id}, {random.randint(1, 10)});"
+    )
+
 
 def add_ord(cursor, arg):
     add_order(cursor, arg)
 
+
 def add_order_get_input():
-    product_id = get_typed_input("Podaj numer ID produktu, który chcesz zamówić: ", int)
-    return(product_id)
+    product_id = get_typed_input(
+        "Podaj numer ID produktu, który chcesz zamówić: ", int)
+    return (product_id)
+
 
 ###############################################################################
 
+
 # Dodawanie konta przez admina
-def add_account_by_admin(cursor, login, password, email, phnumber, address, auth, first_name, last_name):
+def add_account_by_admin(cursor, login, password, email, phnumber, address,
+                         auth, first_name, last_name):
     cursor.execute("""
     INSERT INTO dane_logowania (login, haslo) VALUES ('%s', SHA2('%s', 256));
     """ % (login, password))
@@ -88,10 +101,15 @@ def add_account_by_admin(cursor, login, password, email, phnumber, address, auth
         (SELECT uprawnienie_id FROM uprawnienia WHERE uprawnienie = '%s'),
         '%s', '%s');
     """ % (login, email, auth, first_name, last_name))
-    
-    
+
+    cursor.execute(
+        f"CREATE USER IF NOT EXISTS '{login}'@'localhost' IDENTIFIED BY '{password}' DEFAULT ROLE '{auth}';"
+    )
+
+
 def add_account(cursor, args):
-    add_account_by_admin(cursor, args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7])
+    add_account_by_admin(cursor, args[0], args[1], args[2], args[3], args[4],
+                         args[5], args[6], args[7])
 
 
 def add_account_get_input():
@@ -105,4 +123,5 @@ def add_account_get_input():
     first_name = get_safe_str_input("Imie: ")
     last_name = get_safe_str_input("Nazwisko: ")
     print()
-    return (user, password, email, phnumber, address, auth, first_name, last_name)
+    return (user, password, email, phnumber, address, auth, first_name,
+            last_name)
