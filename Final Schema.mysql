@@ -299,6 +299,12 @@ DELETE FROM dane_kontaktowe WHERE dane_kontaktowe_id IN (SELECT dane_kontaktowe_
 DELETE FROM pracownik WHERE dane_logowania_id IN (SELECT dane_logowania_id FROM Dane_logowania WHERE login=@pracownik);
 DELETE FROM dane_logowania WHERE login=@pracownik;
 DROP USER IF EXISTS 'bob'@'localhost';
+
+-- tak to powinno wygladac z inner join
+DELETE pracownik, dane_logowania, dane_kontaktowe FROM pracownik
+INNER JOIN dane_logowania ON pracownik.dane_logowania_id=dane_logowania.dane_logowania_id
+INNER JOIN dane_kontaktowe ON pracownik.dane_kontaktowe_id=dane_kontaktowe.dane_kontaktowe_id
+WHERE pracownik.pracownik_id = 4;
  
 -------------------------------------------------------------------------------
 
