@@ -10,6 +10,10 @@ class ACTION(Enum):
     EDIT_ACCOUNT = auto()
     DELETE_PRODUCT = auto()
     DELETE_EMPLOYEE = auto()
+    SELECT_EMPLOYEE = auto()
+    SELECT_LOGIN_DATA = auto()
+    SELECT_CONTACT_DATA = auto()
+    SELECT_AUTH = auto()
     QUIT = auto()
 
 
@@ -25,12 +29,16 @@ class ConsoleView:
             ACTION.ADD_ACCOUNT: "Dodaj konto",
             ACTION.EDIT_ACCOUNT: "Edytuj konto",
             ACTION.DELETE_EMPLOYEE: "Usuń konto i dane pracownika",
+            ACTION.SELECT_EMPLOYEE: "Wyświetl pracowników",
+            ACTION.SELECT_LOGIN_DATA: "Wyświetl dane logowania",
+            ACTION.SELECT_CONTACT_DATA: "Wyświetl dane kontaktowe",
+            ACTION.SELECT_AUTH: "Wyświetl uprawnienia",
             ACTION.QUIT: "Zakończ"
         }
         self.available_actions = {
             AUTH.CLIENT : [ACTION.SELECT_PRODUCT, ACTION.ADD_ORDER, ACTION.QUIT],
             AUTH.EMPLOYEE : [ACTION.SELECT_PRODUCT, ACTION.ADD_ORDER, ACTION.ADD_PRODUCT, ACTION.EDIT_PRODUCT, ACTION.DELETE_PRODUCT, ACTION.QUIT],
-            AUTH.ADMIN : [ACTION.SELECT_PRODUCT, ACTION.ADD_ORDER, ACTION.ADD_PRODUCT, ACTION.EDIT_PRODUCT, ACTION.DELETE_PRODUCT, ACTION.ADD_ACCOUNT, ACTION.EDIT_ACCOUNT, ACTION.DELETE_EMPLOYEE, ACTION.QUIT],
+            AUTH.ADMIN : [action for action in ACTION],
         }
 
     def display_menu(self):

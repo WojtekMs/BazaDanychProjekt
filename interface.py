@@ -68,7 +68,18 @@ def main():
             args = del_employee_get_input()
             del_employee(cursor, args)
             print("Konto zostalo usuniete!")
-
+        elif action == ACTION.SELECT_EMPLOYEE:
+            description, rows = select_employees(cursor)
+            pretty_print(description, rows)
+        elif action == ACTION.SELECT_CONTACT_DATA:
+            description, rows = select_contact_data(cursor)
+            pretty_print(description, rows)
+        elif action == ACTION.SELECT_LOGIN_DATA:
+            description, rows = select_login_data(cursor)
+            pretty_print(description, rows)
+        elif action == ACTION.SELECT_AUTH:
+            description, rows = select_authentication(cursor)
+            pretty_print(description, rows)
         view.display_menu()
         action = view.choose_action()
 
@@ -92,6 +103,5 @@ def main():
 
 # NOTATKI 24.01.2022
 # - zrobic wyswietlanie wszystkich pracownikow
-# - wyswietlic numer kasy przy zamowieniu
 if __name__ == "__main__":
     main()
