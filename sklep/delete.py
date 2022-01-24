@@ -34,10 +34,11 @@ def delete_orders(cursor):
 
 ###############################################################################
 
-def delete_employee(cursor, employee_id):
-    cursor.execute(f"DELETE FROM dane_logowania WHERE dane_logowania_id IN (SELECT dane_logowania_id FROM pracownik WHERE pracownik_id={employee_id});")
-    cursor.execute(f"DELETE FROM dane_kontaktowe WHERE dane_kontaktowe_id IN (SELECT dane_kontaktowe_id FROM pracownik WHERE pracownik_id={employee_id});")
-    cursor.execute(f"DELETE FROM pracownik WHERE pracownik_id={employee_id};")
+def delete_employee(cursor, login):
+    cursor.execute(f"DELETE FROM dane_kontaktowe WHERE dane_kontaktowe_id IN (SELECT dane_kontaktowe_id FROM Pracownik INNER JOIN Dane_logowania ON Dane_logowania.dane_logowania_id=Pracownik.dane_logowania_id WHERE Dane_logowania.login='{login}');")
+    cursor.execute(f"DELETE FROM pracownik WHERE dane_logowania_id IN (SELECT dane_logowania_id FROM Dane_logowania WHERE login='{login}');")
+    cursor.execute(f"DELETE FROM dane_logowania WHERE login='{login}';")
+    cursor.execute(f"DROP USER IF EXISTS '{login}'@'localhost'")
     
     
 def del_employee(cursor, args):
@@ -46,6 +47,6 @@ def del_employee(cursor, args):
     
 def del_employee_get_input():
     print("Usun Konto\n")
-    employee_id = get_typed_input("ID Pracownika: ", int)
+    login = get_safe_str_input("Login Pracownika: ")
     print()
-    return (employee_id)
+    return (login)
