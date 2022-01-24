@@ -288,16 +288,17 @@ INSERT INTO zamowienie (produkt_id, kasa_id) VALUES(@produkt, rand() % 10);
 
 -------------------------------------------------------------------------------
 
--- usuwanie konta pracownika (wybieramy pracownik za pomoca pracownik_id)
--- UWAGA: najpierw trzeba wykonac linijke z SET @pracownik =1; zeby to poprawnie zadzialalo 
-SET @pracownik = 13;
+-- usuwanie konta pracownika (wybieramy pracownik za pomoca login)
+-- UWAGA: najpierw trzeba wykonac linijke z SET @pracownik; oraz zmienic recznie nazwe uzytkownika w DROP USER zeby to poprawnie zadzialalo 
+SET @pracownik = 'bob';
 SELECT * FROM pracownik WHERE pracownik_id=@pracownik;
 SELECT * FROM dane_logowania WHERE dane_logowania_id IN (SELECT dane_logowania_id FROM pracownik WHERE pracownik_id=@pracownik);
 SELECT * FROM dane_kontaktowe WHERE dane_kontaktowe_id IN (SELECT dane_kontaktowe_id FROM pracownik WHERE pracownik_id=@pracownik);
 
-DELETE FROM dane_logowania WHERE dane_logowania_id IN (SELECT dane_logowania_id FROM pracownik WHERE pracownik_id=@pracownik);
-DELETE FROM dane_kontaktowe WHERE dane_kontaktowe_id IN (SELECT dane_kontaktowe_id FROM pracownik WHERE pracownik_id=@pracownik);
-DELETE FROM pracownik WHERE pracownik_id=@pracownik;
+DELETE FROM dane_kontaktowe WHERE dane_kontaktowe_id IN (SELECT dane_kontaktowe_id FROM Pracownik INNER JOIN Dane_logowania ON Dane_logowania.dane_logowania_id=Pracownik.dane_logowania_id WHERE Dane_logowania.login=@pracownik);
+DELETE FROM pracownik WHERE dane_logowania_id IN (SELECT dane_logowania_id FROM Dane_logowania WHERE login=@pracownik);
+DELETE FROM dane_logowania WHERE login=@pracownik;
+DROP USER IF EXISTS 'bob'@'localhost';
  
 -------------------------------------------------------------------------------
 

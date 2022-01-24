@@ -92,5 +92,6 @@ def main():
 
 # NOTATKI 24.01.2022
 # - zrobic wyswietlanie wszystkich pracownikow
+# - wyswietlic numer kasy przy zamowieniu
 if __name__ == "__main__":
     main()
