@@ -59,6 +59,10 @@ def edit_account_by_admin(cursor, newLogin, newPassword, worker_id, newAdressEma
         WHERE pracownik_id = %s;
     """ % (newName, newSurname, worker_id))
 
+    cursor.execute(
+        f"CREATE USER IF NOT EXISTS '{newLogin}'@'localhost' IDENTIFIED BY '{newPassword}' DEFAULT ROLE 'pracownik';"
+    )
+
 
 def edit_account(cursor, args):
     edit_account_by_admin(cursor, args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7])
