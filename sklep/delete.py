@@ -35,9 +35,12 @@ def delete_orders(cursor):
 ###############################################################################
 
 def delete_employee(cursor, login):
-    cursor.execute(f"DELETE FROM dane_kontaktowe WHERE dane_kontaktowe_id IN (SELECT dane_kontaktowe_id FROM Pracownik INNER JOIN Dane_logowania ON Dane_logowania.dane_logowania_id=Pracownik.dane_logowania_id WHERE Dane_logowania.login='{login}');")
-    cursor.execute(f"DELETE FROM pracownik WHERE dane_logowania_id IN (SELECT dane_logowania_id FROM Dane_logowania WHERE login='{login}');")
-    cursor.execute(f"DELETE FROM dane_logowania WHERE login='{login}';")
+    cursor.execute(
+        "DELETE pracownik, dane_logowania, dane_kontaktowe FROM pracownik " \
+        "INNER JOIN dane_logowania ON pracownik.dane_logowania_id=dane_logowania.dane_logowania_id " \
+        "INNER JOIN dane_kontaktowe ON pracownik.dane_kontaktowe_id=dane_kontaktowe.dane_kontaktowe_id " \
+        f"WHERE dane_logowania.login ='{login}';")
+    
     cursor.execute(f"DROP USER IF EXISTS '{login}'@'localhost'")
     
     
