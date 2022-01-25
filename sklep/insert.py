@@ -67,6 +67,9 @@ def add_order(cursor, product_id):
     cursor.execute(
         f"INSERT INTO zamowienie (produkt_id, kasa_id) VALUES({product_id}, {cash_desk_nr});"
     )
+    cursor.execute(
+        f"UPDATE produkty SET ilosc = ilosc - 1 WHERE produkt_id = {product_id}"
+    )
     return cash_desk_nr
 
 

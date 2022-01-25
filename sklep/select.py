@@ -71,7 +71,7 @@ def select_product_get_input():
 
 def select_product_get_query(args):
     queries = []
-    query = f"SELECT Produkty.* FROM Produkty "
+    query = f"SELECT Produkty.produkt_id, Produkty.opis, Produkty.ilosc, Produkty.cena FROM Produkty "
     if args[0] != "":
         query += "INNER JOIN Producenci ON Produkty.producent_id=Producenci.producent_id "
         queries.append(f"Producenci.producent='{args[0]}' ")
